@@ -4,15 +4,22 @@ A no-install, accumulation-format secondary-conjugate assay explorer for Data-Ri
 
 **All results are synthetic. All default parameters are illustrative assumptions. This is an uncalibrated hypothesis generator, not a predictor of a specific antibody, receptor, toxin, organoid, or commercial assay.**
 
-[Open the browser explorer](https://datarichinsightpoor.github.io/organoid-hook-model/) · [Read the companion article](docs/the-hook-is-a-property-of-the-system.md) · [Mathematical specification](docs/model.md) · [Public-source provenance](docs/provenance.md)
+## Model, code, and mathematics
+
+- **Interactive model:** [Open the public Organoid Hook Model](https://datarichinsightpoor.github.io/organoid-hook-model/).
+- **Source code:** [Browse the Python package](https://github.com/dataRichinsightPoor/organoid-hook-model/tree/main/src/organoid_hook), including the [dynamic solver](https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/src/organoid_hook/model.py) and [analytical equilibrium model](https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/src/organoid_hook/equilibrium.py).
+- **Mathematics:** [Read all equations, variables, units, and parameters on GitHub](https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/docs/model.md), or open the [typeset browser version](https://datarichinsightpoor.github.io/organoid-hook-model/equations.html).
+- **Illustrated article:** [Read the article with figures](https://datarichinsightpoor.github.io/organoid-hook-model/article.html), or open the [GitHub manuscript](docs/the-hook-is-a-property-of-the-system.md).
+
+The [public-source provenance](docs/provenance.md) and [scientific challenge and literature audit](docs/scientific-challenge.md) document the evidence boundaries and revisions.
 
 [Run and modify the actual model in Colab](https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb). The notebook downloads the version-pinned public release, runs the tests, and lets you change continuous parameters without a local Python installation; it executes in a third-party notebook runtime.
 
 [Follow one simulation](https://datarichinsightpoor.github.io/organoid-hook-model/#follow-one-simulation): step through six computed time points from receptor copies to fluorescence, compare three dose conditions, and inspect the substituted equations in the [complete worked example](https://datarichinsightpoor.github.io/organoid-hook-model/worked-example.html). This fixed Reference example is independent of the atlas controls and uses the unchanged v0.1.0 model. Its downloadable script, parameters, shell states, and aggregate trajectories are included.
 
-The explorer and reading pages open in dark mode, with a manual light-mode option. The expanded article includes eleven peer-reviewed references and a separately identified technical protocol. Its [publication cover](figures/cover-hook-system.png) uses actual viewer captures; `tools/build_cover.py` reproduces the composition from committed screenshots.
+The explorer and reading pages open in dark mode, with a manual light-mode option. The expanded article includes fifteen peer-reviewed references and separately identified manufacturer documentation. Its [publication cover](figures/cover-hook-system.png) uses actual viewer captures; `tools/build_cover.py` reproduces the composition from committed screenshots.
 
-The [LinkedIn and Substack publication kit](publication/README.md) contains the self-contained manuscript, portable inline notation, four typeset equation images in light and dark versions, and the existing cover and scientific figures.
+The [LinkedIn and Substack publication kit](publication/README.md) contains the illustrated manuscript, portable inline notation, five typeset equation images in light and dark versions, and the cover and six scientific figures.
 
 ## What you can explore
 

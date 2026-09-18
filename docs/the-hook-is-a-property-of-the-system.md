@@ -2,6 +2,8 @@
 
 Data-Rich, Insight-Poor — CCXXIV
 
+[Explore the interactive model](https://datarichinsightpoor.github.io/organoid-hook-model/) · [View the source code on GitHub](https://github.com/dataRichinsightPoor/organoid-hook-model/tree/main/src/organoid_hook) · [Read the mathematical specification on GitHub](https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/docs/model.md) · [View the typeset equations](https://datarichinsightpoor.github.io/organoid-hook-model/equations.html)
+
 ![Organoid Hook Model: dose-response curves and receptor-to-fluorescence trajectories in the public explorer.](../figures/cover-hook-system.png)
 
 Accumulation-format reference simulations at 72 hours. The curves and molecular inventories are model outputs, not experimental measurements.
