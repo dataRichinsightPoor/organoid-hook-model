@@ -100,12 +100,12 @@ def figures(lab,sensitivity):
     for ax,case,title in zip(axs,["reference","reporter_loss"],["Persistent reporter","Reporter-loss stress test"]):
         row=next(r for r in lab["curves"] if r["case"]==case and r["order"]=="simultaneous" and r["secondary"]==100)
         vals=np.array(row["values"])
-        for idx,label,c,style in [(1,"Committed to death","#B05B36","--"),(2,"Cumulative membrane loss","#667580",":"),(0,"Permeability fluorescence","#006D77","-")]:
+        for idx,label,c,style in [(1,"Committed to cell death","#B05B36","--"),(2,"Cumulative membrane loss","#667580",":"),(0,"Permeability fluorescence","#006D77","-")]:
             ax.semilogx(DOSES,vals[:,-1,idx],label=label,color=c,ls=style,lw=2)
         ax.set(title=title,xlabel="Primary antibody (nM)",ylabel="Normalized population / signal",ylim=(-.02,1.03))
         ax.grid(axis="y",alpha=.13)
     axs[0].legend(frameon=False,fontsize=10)
-    fig.suptitle("Accumulated death and endpoint fluorescence are different model variables\nSynthetic 72 h example; reporter loss is an optional hypothesis, not a claim about a commercial assay",fontsize=14)
+    fig.suptitle("Accumulated cell death and endpoint fluorescence are different model variables\nSynthetic 72 h example; reporter loss is an optional hypothesis, not a claim about a commercial assay",fontsize=14)
     fig.savefig(ROOT/"figures/readout-separation.png",dpi=180)
     fig.savefig(ROOT/"figures/readout-separation.svg",metadata={"Date":None})
     plt.close(fig)

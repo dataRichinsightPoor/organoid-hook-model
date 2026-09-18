@@ -200,7 +200,7 @@ def mechanism_figure():
             "Endosomal W can recycle or",
             "be processed into productive P.",
             "P drives reversible damage Q;",
-            "death and reporter entry follow.",
+            "cell death and reporter entry follow.",
             "", "η = 0.2; recovery half-time = 24 h"]),
         "poor_release": ("Poor productive release", [
             "The bottleneck is after uptake.",
@@ -214,7 +214,7 @@ def mechanism_figure():
             "Half-time: 24 h → 2 h.",
             "Binding and delivery are unchanged;",
             "less damage may persist long",
-            "enough for death commitment.",
+            "enough for cell death commitment.",
             "", "Q is a generic damage/deficit state."]),
         "slow_repair": ("Slow protein recovery", [
             "Recovery removes Q more slowly.",
@@ -227,7 +227,7 @@ def mechanism_figure():
             "Loss occurs after permeabilization.",
             "Reporter-accessible material D",
             "moves into the unobserved state X.",
-            "The death trajectory is unchanged.",
+            "The cell death trajectory is unchanged.",
             "", "Loss rate: 0 → 0.08 h⁻¹.",
             "Hypothesis only; off by default."]),
         "core_low": ("Target-poor core", [
