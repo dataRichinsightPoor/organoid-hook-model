@@ -4,7 +4,7 @@ A no-install, no-wash secondary-conjugate assay explorer for Data-Rich, Insight-
 
 **All results are synthetic. All default parameters are illustrative assumptions. This is an uncalibrated hypothesis generator, not a predictor of a specific antibody, receptor, toxin, organoid, or commercial assay.**
 
-[Open the browser explorer](https://datarichinsightpoor.github.io/organoid-hook-model/) · [Read the companion article](docs/the-hook-is-a-property-of-the-system.pplx.md) · [Mathematical specification](docs/model.md) · [Public-source provenance](docs/provenance.md)
+[Open the browser explorer](https://datarichinsightpoor.github.io/organoid-hook-model/) · [Read the companion article](docs/the-hook-is-a-property-of-the-system.md) · [Mathematical specification](docs/model.md) · [Public-source provenance](docs/provenance.md)
 
 [Run and modify the actual model in Colab](https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb). The notebook downloads the version-pinned public release, runs the tests, and lets you change continuous parameters without a local Python installation; it executes in a third-party notebook runtime.
 

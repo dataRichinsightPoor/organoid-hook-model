@@ -35,6 +35,27 @@ def test_accumulation_no_reporter_loss():
     assert np.diff(s["permeability_fluorescence"]).min()>-1e-9
     assert np.diff(s["delivered_payload_cumulative"]).min()>-1e-6
 
+@pytest.mark.parametrize("loss",[0.0,0.1])
+def test_article_fluorescence_history_integral(loss):
+    """The article's history integral reproduces the implemented observation."""
+    from scipy.integrate import trapezoid
+    p=replace(Parameters(),reporter_loss_h=loss,fluorescence_saturation=0)
+    times=np.linspace(0,72,7201)
+    result=simulate(8.25404185268019,3,p=p,times=times,rtol=2e-8,atol=1e-11)
+    z=result["states"][3:].reshape(p.shells,N,-1)
+    _,cells,*_=geometry(p)
+    weights=cells/cells.sum()
+    optical=np.linspace(p.optical_core_weight,1,p.shells)
+    omega=weights*optical/np.dot(weights,optical)
+    for endpoint in (12,24,48,72):
+        selected=times<=endpoint
+        u=times[selected]
+        entry=z[:,I["E"],selected]/p.membrane_delay_h
+        history=trapezoid(entry*np.exp(-loss*(endpoint-u)),x=u,axis=1)
+        expected=np.dot(omega,history)
+        actual=summarize(result)["permeability_fluorescence"][selected][-1]
+        assert np.isclose(expected,actual,atol=2e-6,rtol=0)
+
 def test_zero_receptors():
     s=summarize(simulate(p=replace(Parameters(),copies_per_cell=0),times=[72]))
     assert abs(s["permeability_fluorescence"][0])<1e-9
