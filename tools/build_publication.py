@@ -44,6 +44,7 @@ text = text.replace("../figures/", "figures/")
 (OUT / "figures").mkdir(exist_ok=True)
 for filename in ("cover-hook-system.png", "cover-hook-system-linkedin.png",
                  "mechanism-map.png", "readout-separation.png",
-                 "cell-scenarios.png", "cell-trafficking.png", "cell-addition-orders.png"):
+                 "cell-scenarios.png", "cell-trafficking.png", "cell-addition-orders.png",
+                 "cell-hook-assembly.png"):
     shutil.copyfile(ROOT / "figures" / filename, OUT / "figures" / filename)
-print("Built publication manuscript and copied two covers and five scientific figures.")
+print("Built publication manuscript and copied two covers and six scientific figures.")

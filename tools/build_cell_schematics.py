@@ -124,6 +124,72 @@ def organoid(c, x, y, sparse=False):
         c.text(x+40, y+5, "slower bath → core access", 26, GOLD)
 
 
+def hook_figure():
+    """Qualitative assembly contrast; no glyph count is a numerical estimate."""
+    c = Canvas(1460, "The hook begins with partitioning",
+               "Receptor occupancy can remain high while secondary-loaded surface complexes decline")
+    titles = ["Balanced assembly", "Excess primary", "Increased secondary"]
+    subtitles = ["Primary and secondary available", "Primary ↑ · secondary unchanged",
+                 "Primary stays high · secondary ↑"]
+    notes = [
+        ["Secondary loads a substantial",
+         "fraction of receptor-bound primary.",
+         "Surface ternary complexes can",
+         "enter the delivery pathway."],
+        ["Finite secondary is distributed",
+         "across a larger primary pool.",
+         "Unloaded primary competes for R;",
+         "occupancy stays high, loading falls."],
+        ["More secondary increases the",
+         "fraction of primary carrying it.",
+         "Surface loading can recover without",
+         "restoring the original payload history."],
+    ]
+    # R count is held fixed; panels 2 and 3 retain the same total A icons.
+    # Total S icons are equal in panels 1 and 2, higher in panel 3.
+    free_a = [4, 12, 12]
+    soluble_c = [1, 4, 7]
+    loaded = [4, 1, 3]
+    free_s = [1, 1, 2]
+    bound_a = [5, 6, 6]
+    assert soluble_c[0]+loaded[0]+free_s[0] == soluble_c[1]+loaded[1]+free_s[1]
+    assert free_a[1]+bound_a[1] == free_a[2]+bound_a[2]
+    for i in range(3):
+        x = 40+i*650
+        c.card(x, 240, 620, 900, titles[i])
+        c.text(x+28, 315, subtitles[i], 25, CYAN if i==0 else GOLD)
+        c.text(x+28, 372, "EXTRACELLULAR", 22, MUTED)
+        for n in range(free_a[i]):
+            c.antibody(x+70+(n%6)*88, 449+(n//6)*85,
+                       secondary=n < soluble_c[i])
+        for n in range(free_s[i]):
+            xx = x+450+n*64
+            c.d.rectangle((xx, 587, xx+22, 609), fill=GOLD)
+        # Cutaway: same surface area and receptor inventory in every panel.
+        c.d.rounded_rectangle((x+25, 708, x+595, 907), 30,
+                              fill=IN, outline=LINE, width=3)
+        c.line([(x+25, 708), (x+595, 708)], FG, 4)
+        for n in range(6):
+            c.receptor(x+70+n*88, 699,
+                       primary=n < bound_a[i], secondary=n < loaded[i])
+        c.text(x+28, 762, "CELL", 23, MUTED)
+        c.arrow([(x+290, 755), (x+290, 828)], CYAN, [7, 3, 5][i])
+        c.text(x+52, 856, ["More loaded complexes T", "Fewer loaded complexes T",
+                         "Loading increases again"][i], 29, CYAN)
+        for j, text in enumerate(notes[i]):
+            c.text(x+28, 946+j*43, text, 26, MUTED)
+    c.antibody(82, 1200)
+    c.text(126, 1179, "Primary A", 28, CYAN)
+    c.d.rectangle((362, 1190, 387, 1215), fill=GOLD)
+    c.text(412, 1179, "Secondary–toxin S", 28, GOLD)
+    c.receptor(823, 1202, primary=False)
+    c.text(871, 1179, "Receptor R", 28)
+    c.text(1197, 1179, "T = receptor–primary–secondary", 28)
+    c.text(60, 1250, "Two routes remain available:  S + receptor–primary ⇌ T     soluble primary–secondary + R ⇌ T", 29)
+    c.footer(1324, "Illustrative partitioning, not a time sequence or dose recommendation. Icon counts are not quantitative.")
+    c.save("cell-hook-assembly.png")
+
+
 def mechanism_figure():
     c = Canvas(2780, "Where the scenarios act", "Seven mechanism-lab cases, located along the delivery-to-readout sequence")
     sequence = ["reference", "poor_release", "fast_repair", "slow_repair",
@@ -328,3 +394,4 @@ if __name__ == "__main__":
     mechanism_figure()
     traffic_figure()
     addition_figure()
+    hook_figure()
