@@ -20,10 +20,10 @@ export async function exportEquationImages(chromium, {
     await page.goto(url, {waitUntil:'networkidle'});
     await page.evaluate(()=>MathJax.startup.promise);
     const displays = page.locator('mjx-container[display=true]');
-    if (await displays.count() !== 4 || await page.locator('mjx-merror').count()) {
-      throw new Error('The four expected equations did not render correctly.');
+    if (await displays.count() !== 5 || await page.locator('mjx-merror').count()) {
+      throw new Error('The five expected equations did not render correctly.');
     }
-    const names = ['01-assembly','02-high-dose-limit','03-payload-balance','04-fluorescence-history'];
+    const names = ['01-assembly','02-high-dose-limit','05-secondary-excess','03-payload-balance','04-fluorescence-history'];
     for (const theme of ['light','dark']) {
       await mkdir(resolve(output,theme), {recursive:true});
       await page.evaluate(theme=>{
@@ -41,7 +41,7 @@ export async function exportEquationImages(chromium, {
         await displays.nth(i).screenshot({path:resolve(output,theme,`${names[i]}.png`)});
       }
     }
-    return {equations:4,variants:2,output};
+    return {equations:5,variants:2,output};
   } finally {
     await browser.close();
   }

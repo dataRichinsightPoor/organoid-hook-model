@@ -62,6 +62,12 @@ The added “Calibration and prediction” section distinguishes synthetic param
 
 All 41 tests passed. Both manuscript exports contain the complete note. Browser verification confirmed the note and independent-validation wording, four mathematical displays without MathJax errors, eleven references, and the dark default. Desktop and 375 px screenshots were visually inspected without clipping or page overflow. Git comparison confirmed no changes to the numerical implementation, tests, results, or atlas datasets.
 
+## Secondary-excess interpretation
+
+Verify the new limiting equation against the exact receptor-dilute equilibrium, the 1-to-10 nM primary example at 1,000 nM secondary, and the distinction between loaded surface receptors, payload, and fluorescence. Check that excess is assessed after the increase and locally over time, that finite-excess monotonicity is not asserted universally, and that the analytical example is not represented as part of the precomputed atlas. Rebuild both manuscript versions, export five equations in two themes, inspect desktop and 375 px layouts, and rerun the model tests. Numerical implementation and simulation datasets must remain unchanged.
+
+All 43 tests passed. The two added equilibrium tests verify the article's loaded fractions (0.49984989 and 0.90881551), their 1.81817686-fold ratio, the monotonic 1-to-10 nM interval for the stated affinities, and a contrasting affinity regime that prevents treating nominal secondary excess as a universal monotonicity rule. The browser rendered five displays without MathJax errors, seven loaded images, and eleven references. Dark default and a complete light/dark toggle cycle passed; desktop and 375 px screenshots and the new equation image were visually inspected. No page or equation overflow or JavaScript errors occurred. Blocking external scripts preserved the equation as readable TeX. Both manuscript versions and all ten light/dark equation images were regenerated. Numerical implementation and simulation datasets remain unchanged.
+
 ## Tool section
 
 Verify that “The tool” describes the implemented model, both browser modes, the independent worked trace, exports, and Python customization without implying live browser simulation or experimental fitting. Its model, walkthrough, worked equations, specification, and source-code links must match the available resources. Check all four paragraphs in both manuscript versions and the browser page, and inspect desktop and mobile layout. This addition changes documentation only.

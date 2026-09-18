@@ -24,6 +24,7 @@ INLINE = {
 EQUATIONS = [
     ("01-assembly", "Soluble antibody complex and receptor-bound ternary complex at equilibrium."),
     ("02-high-dose-limit", "At large primary excess, ternary complex declines in inverse proportion to primary concentration."),
+    ("05-secondary-excess", "With sufficient secondary excess, nearly all primary is loaded and the surface ternary fraction approaches receptor saturation."),
     ("03-payload-balance", "Current productive payload changes by delivery minus first-order loss."),
     ("04-fluorescence-history", "Normalized fluorescence is an optically weighted integral of permeabilization history and reporter persistence."),
 ]
@@ -38,7 +39,7 @@ def display(match):
 
 text = re.sub(r"\\\[[\s\S]*?\\\]", display, text)
 text = re.sub(r"\\\(([\s\S]*?)\\\)", lambda m: INLINE[m.group(1)], text)
-assert counter == 4 and r"\(" not in text and r"\[" not in text
+assert counter == 5 and r"\(" not in text and r"\[" not in text
 text = text.replace("../figures/", "figures/")
 (OUT / "the-hook-is-a-property-of-the-system.md").write_text(text)
 (OUT / "figures").mkdir(exist_ok=True)

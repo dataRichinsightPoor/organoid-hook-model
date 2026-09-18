@@ -19,3 +19,22 @@ def test_high_primary_asymptote():
 
 def test_more_secondary_moves_equilibrium_peak():
     assert peak_primary_nm(100)>peak_primary_nm(3)>peak_primary_nm(.1)
+
+def test_article_tenfold_primary_with_secondary_excess():
+    # Receptor-dilute analytical example, not a dynamic organoid simulation.
+    a=np.array([1.,10.])
+    fraction=ternary_equilibrium(a,1000.,.001)/.001
+    assert np.allclose(fraction,[.500,.909],atol=.0002,rtol=0)
+    assert np.isclose(fraction[1]/fraction[0],1.82,atol=.003)
+    assert np.allclose(fraction,a/(1+a),rtol=.0004)
+    grid=np.geomspace(1.,10.,101)
+    assert np.all(np.diff(ternary_equilibrium(grid,1000.,.001))>0)
+    assert peak_primary_nm(1000.)>10.
+
+def test_finite_secondary_excess_is_not_a_universal_monotonicity_rule():
+    # Strong primary affinity can place a small decline inside nominal S excess.
+    ka=1e-6
+    ks=.3
+    peak=peak_primary_nm(1000.,ka,ks)
+    assert peak<10.
+    assert ternary_equilibrium(10.,1000.,.001,ka,ks)<ternary_equilibrium(peak,1000.,.001,ka,ks)
