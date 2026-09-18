@@ -8,17 +8,19 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
+  <script src="trace.js" defer></script>
 </head>
 <body>
 <header>
   <div class="brand"><svg aria-label="Organoid Hook Model logo" viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 21C10 21 9 9 15 9S21 23 28 19" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Data-Rich, Insight-Poor <span class="subbrand">/ Executable evidence</span></span></div>
-  <nav aria-label="Project links"><a href="https://github.com/dataRichinsightPoor/organoid-hook-model" target="_blank" rel="noopener">GitHub</a><a href="equations.html">Equations & variables</a><button id="theme" type="button" aria-label="Toggle color theme">Light mode</button></nav>
+  <nav aria-label="Project links"><a href="#follow-one-simulation">Follow one simulation</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model" target="_blank" rel="noopener">GitHub</a><a href="equations.html">Equations & variables</a><button id="theme" type="button" aria-label="Toggle color theme">Light mode</button></nav>
 </header>
 <div class="layout">
 <aside aria-label="Simulation controls">
   <div class="section-label">EXPLORER / v0.1.0</div>
   <h1>Organoid<br>Hook Model</h1>
   <p class="muted intro">Separate the curve from the mechanism.</p>
+  <p class="control-note"><a href="#follow-one-simulation">New here? Follow one simulation →</a></p>
   <div class="tabs" role="group" aria-label="Explorer mode"><button class="active" id="atlas-mode" aria-pressed="true">Receptor atlas</button><button id="lab-mode" aria-pressed="false">Mechanism lab</button></div>
   <div id="atlas-controls">
     <label for="copies">Initial surface copies / cell</label>
@@ -70,6 +72,50 @@
     </div>
   </section>
   <details class="data-details"><summary>Inspect exact values for displayed curves</summary><div class="table-scroll"><table><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div></details>
+  <section id="follow-one-simulation" class="trace-section" aria-labelledby="trace-title">
+    <div class="section-label">WORKED EXAMPLE · SAME PYTHON MODEL</div>
+    <h2 id="trace-title">Follow one simulation</h2>
+    <p class="trace-lede">Start with 100,000 surface receptors per cell. Follow assembly, productive delivery, damage, and the signal that becomes visible later.</p>
+    <p class="small muted">Fixed Reference biology · 150 µm radius · simultaneous addition · no wash. This section is independent of the explorer controls above. Every snapshot is computed, not interpolated.</p>
+    <div class="trace-controls">
+      <div><label for="trace-case">Reagent condition</label><select id="trace-case" disabled>
+        <option value="sampled_peak">Sampled peak · A 8.254 / S 3 nM</option>
+        <option value="primary_excess">Excess primary · A 1,000 / S 3 nM</option>
+        <option value="more_secondary">More secondary · A 1,000 / S 100 nM</option>
+      </select></div>
+      <fieldset id="trace-times" disabled><legend>Time from simultaneous addition</legend>
+        <div class="trace-time-buttons" role="group" aria-label="Trace time">
+          <button type="button" data-hour="0" aria-pressed="false">0 h</button>
+          <button type="button" data-hour="6" aria-pressed="false">6 h</button>
+          <button type="button" data-hour="12" aria-pressed="false">12 h</button>
+          <button type="button" data-hour="24" aria-pressed="true">24 h</button>
+          <button type="button" data-hour="48" aria-pressed="false">48 h</button>
+          <button type="button" data-hour="72" aria-pressed="false">72 h</button>
+        </div>
+      </fieldset>
+    </div>
+    <p id="trace-error" role="alert" hidden></p>
+    <div id="trace-output" aria-live="polite" aria-busy="true">
+      <p class="muted">Loading the verified trajectory…</p>
+    </div>
+    <details class="data-details"><summary>Compare the three conditions at 72 hours</summary>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Endpoint comparison table"><table>
+        <caption>Fixed biology, different reagent concentrations. Counts are per initial cell.</caption>
+        <thead><tr><th scope="col">Measurement</th><th scope="col">A 8.254 / S 3 nM</th><th scope="col">A 1,000 / S 3 nM</th><th scope="col">A 1,000 / S 100 nM</th></tr></thead>
+        <tbody id="trace-comparison"></tbody>
+      </table></div>
+    </details>
+    <p class="trace-takeaway"><strong>A recovered endpoint does not establish recovered delivery.</strong> More secondary can restore near-maximal fluorescence without restoring the original payload level. This is one illustrative parameter set, not a diagnosis of an experimental assay.</p>
+    <p class="small muted">The model retains a fixed initial-cell receptor scaffold after death commitment. Late trafficking and payload counts may be overestimated and are not measurements in surviving cells. Fluorescence is normalized to a hypothetical fully permeabilized population, not calibrated CellTox Green RFU.</p>
+    <a class="trace-reading-link" href="worked-example.html">Read the full worked equations and assumptions →</a>
+    <div class="trace-downloads" aria-label="Worked example downloads">
+      <a href="trace/trace-summary.csv" download>Trajectory CSV</a>
+      <a href="trace/trace-shells.csv" download>Shell states CSV</a>
+      <a href="trace/trace-parameters.json" download>Complete parameters JSON</a>
+      <a href="trace/trace_example.py" download>Reproduction script</a>
+    </div>
+    <noscript><p>Enable JavaScript to switch snapshots, or <a href="worked-example.html">read the static worked example</a> and download the trajectory CSV.</p></noscript>
+  </section>
   <section class="notes"><h3>What this model does not establish</h3><p>These simulations do not identify a mechanism in a real assay. Effective 1:1:1 binding omits multivalent cross-linking; the three-shell geometry is deliberately coarse. Receptors persist on a fixed initial-cell scaffold after death commitment. Neither commercial kit calibration nor empirical fluorescence loss is assumed.</p><p>Reporter loss is <strong>off by default</strong>. The mechanism lab exposes it only as a stress test. “Protein recovery” is a generic downstream repair timescale, distinct from endosomal receptor degradation and surface internalization.</p><p>All delayed-addition comparisons here use the same clock from first addition. They therefore also differ in combined-reagent exposure duration. Precomplexing represents the equilibrium limit in the bath, not a particular incubation protocol.</p></section>
   <footer><a href="article.html">Read the companion article</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/docs/provenance.md">Public-source audit</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/CITATION.cff">Cite this software</a><span>MIT · Ermelinda Damko · 2026</span></footer>
 </main>
