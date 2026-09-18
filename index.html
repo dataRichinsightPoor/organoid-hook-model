@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A synthetic, no-wash secondary-conjugate assay atlas separating assembly, trafficking, transport, and readout.">
+  <title>Organoid Hook Model | Data-Rich, Insight-Poor</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="brand"><svg aria-label="Organoid Hook Model logo" viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 21C10 21 9 9 15 9S21 23 28 19" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Data-Rich, Insight-Poor <span class="subbrand">/ Executable evidence</span></span></div>
+  <nav aria-label="Project links"><a href="https://github.com/dataRichinsightPoor/organoid-hook-model" target="_blank" rel="noopener">GitHub</a><a href="equations.html">Equations & variables</a><button id="theme" type="button" aria-label="Toggle color theme">Light mode</button></nav>
+</header>
+<div class="layout">
+<aside aria-label="Simulation controls">
+  <div class="section-label">EXPLORER / v0.1.0</div>
+  <h1>Organoid<br>Hook Model</h1>
+  <p class="muted intro">Separate the curve from the mechanism.</p>
+  <div class="tabs" role="group" aria-label="Explorer mode"><button class="active" id="atlas-mode" aria-pressed="true">Receptor atlas</button><button id="lab-mode" aria-pressed="false">Mechanism lab</button></div>
+  <div id="atlas-controls">
+    <label for="copies">Initial surface copies / cell</label>
+    <select id="copies"><option value="10000">10,000</option><option value="100000" selected>100,000</option><option value="1000000">1,000,000</option></select>
+    <label for="traffic">Trafficking archetype</label>
+    <select id="traffic"><option value="slow">Slow internalization</option><option value="recycling">Rapid recycling</option><option value="retained" selected>Endosomal retention</option></select>
+    <label for="half">Endosomal receptor degradation half-time</label>
+    <select id="half"><option value="4">4 h</option><option value="24" selected>24 h</option><option value="96">96 h</option></select>
+  </div>
+  <div id="lab-controls" hidden>
+    <label for="case">Isolated assumption</label><select id="case"></select>
+    <p class="control-note" id="case-description"></p>
+  </div>
+  <label for="order">Order of addition · no wash</label>
+  <select id="order"><option value="simultaneous">Simultaneous</option><option value="primary_first">Primary first → secondary at 6 h</option><option value="secondary_first">Secondary first → primary at 6 h</option><option value="precomplexed">Precomplexed at equilibrium</option></select>
+  <label for="time">Read time from first addition</label>
+  <select id="time"><option value="0">24 h</option><option value="1">48 h</option><option value="2" selected>72 h</option></select>
+  <label for="readout">Vertical-axis measurement</label>
+  <select id="readout"><option value="permeability_fluorescence">Permeability fluorescence</option><option value="committed_fraction">Committed to death</option><option value="membrane_compromised_cumulative">Cumulative membrane loss</option><option value="atp_proxy">ATP-like signal</option><option value="caspase_proxy">Committed-state / caspase proxy</option><option value="ldh_proxy">LDH-like reporter</option><option value="surface_complex_copies">Surface ternary complex</option><option value="internalized_complex_copies">Endosomal ternary complex</option><option value="payload_copies">Intracellular payload</option><option value="delivered_payload_cumulative">Cumulative productive delivery</option></select>
+  <button class="primary-button" id="reset">Reset to reference</button>
+  <div class="divider"></div>
+  <p class="control-note">Browse exact, precomputed Python outputs. No interpolation. To change any continuous parameter, export the configuration and run the Python package.</p>
+  <button id="parameters">Download parameters JSON</button>
+  <p class="control-note"><a href="https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb" target="_blank" rel="noopener">Run the actual model in Colab →</a><br>Editable parameters, tests, and plots in a notebook runtime.</p>
+  <details><summary>What stays fixed?</summary><div id="fixed"></div></details>
+</aside>
+<main>
+  <div class="topline"><span class="badge">SYNTHETIC · UNCALIBRATED</span><span id="count" class="muted">Loading evidence…</span></div>
+  <section class="heading-row"><div><h2>More reagent. A different system.</h2><p id="context" class="muted">Loading computed scenarios…</p></div><button id="csv" disabled>Export displayed CSV</button></section>
+  <div id="error" role="alert" hidden></div>
+  <section class="plot-card">
+    <div class="plot-heading"><div><h3 id="plot-title">Primary × secondary concentration</h3><p class="muted small" id="y-description">Normalized to a modeled, fully permeabilized initial population.</p></div><button id="png" disabled>Save chart</button></div>
+    <div class="legend" aria-label="Secondary concentration legend"><span><i class="line one"></i>0.1 nM secondary</span><span><i class="line two"></i>3 nM secondary</span><span><i class="line three"></i>100 nM secondary</span></div>
+    <div class="canvas-wrap"><canvas id="curve" role="img" aria-label="Dose-response curves for three secondary-conjugate concentrations. Exact values are available in the table below."></canvas></div>
+    <div id="tooltip" class="tooltip" hidden></div>
+    <p class="small muted" id="plot-note"></p>
+  </section>
+  <section class="metrics" id="metrics" aria-label="Descriptive hook summaries" aria-live="polite"></section>
+  <section class="lower-grid">
+    <div class="plot-card"><div class="plot-heading"><div><h3>Readout is an observation model</h3><p class="small muted">At the selected primary concentration and 3 nM secondary.</p></div></div>
+      <label for="dose" class="inline-label">Inspect primary concentration</label><select id="dose"></select>
+      <div class="canvas-wrap small-canvas"><canvas id="timechart" role="img" aria-label="Time courses of modeled death, permeability fluorescence, and ATP-like signal."></canvas></div>
+      <div class="legend small"><span><i class="line one"></i>Committed</span><span><i class="line two"></i>Permeability</span><span><i class="line three"></i>ATP-like</span></div>
+    </div>
+    <div class="plot-card"><h3>Where does the response occur?</h3><p class="small muted">Death commitment in the innermost and outermost model shells, at the selected primary dose and 3 nM secondary.</p>
+      <div class="spatial-row"><span>Core</span><div class="bar-track"><div id="core-bar"></div></div><strong id="core-value">—</strong></div>
+      <div class="spatial-row"><span>Rim</span><div class="bar-track"><div id="rim-bar"></div></div><strong id="rim-value">—</strong></div>
+      <div class="divider"></div><h3>Interpretation boundary</h3><p id="interpretation" class="small"></p><p class="small muted">A low, flat signal is not a rescued assay. A plateau can conceal an upstream hook. More secondary does not identify the failed step.</p>
+    </div>
+  </section>
+  <details class="data-details"><summary>Inspect exact values for displayed curves</summary><div class="table-scroll"><table><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div></details>
+  <section class="notes"><h3>What this model does not establish</h3><p>These simulations do not identify a mechanism in a real assay. Effective 1:1:1 binding omits multivalent cross-linking; the three-shell geometry is deliberately coarse. Receptors persist on a fixed initial-cell scaffold after death commitment. Neither commercial kit calibration nor empirical fluorescence loss is assumed.</p><p>Reporter loss is <strong>off by default</strong>. The mechanism lab exposes it only as a stress test. “Protein recovery” is a generic downstream repair timescale, distinct from endosomal receptor degradation and surface internalization.</p><p>All delayed-addition comparisons here use the same clock from first addition. They therefore also differ in combined-reagent exposure duration. Precomplexing represents the equilibrium limit in the bath, not a particular incubation protocol.</p></section>
+  <footer><a href="article.html">Read the companion article</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/docs/provenance.md">Public-source audit</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/CITATION.cff">Cite this software</a><span>MIT · Ermelinda Damko · 2026</span></footer>
+</main>
+</div>
+</body>
+</html>

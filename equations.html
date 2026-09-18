@@ -1,0 +1,560 @@
+<!doctype html><html lang="en" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Equations & variables | Organoid Hook Model</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{enableMenu:true}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+</head><body><header><div class="brand">Data-Rich, Insight-Poor / Organoid Hook Model</div>
+<nav><a href="index.html">Open explorer</a><a href="equations.html">Equations</a><a href="article.html">Article</a><button id="reader-theme">Dark mode</button></nav></header>
+<main class="reader"><p class="math-help">Synthetic, uncalibrated research software · v0.1.0.
+Equations render in your browser; if the math service is blocked, the complete TeX remains visible.
+<a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/docs/model.md">View the underlying Markdown</a>.</p>
+<h1>Mathematical specification of the organoid hook model</h1>
+<p>Version 0.1.0. This document defines the equations actually implemented in <code>src/organoid_hook/model.py</code>, a compact analytical reduction in <code>equilibrium.py</code>, every state variable, and every configurable parameter. The mathematics is a proposed, uncalibrated model, not an identification of the cause of any experimental observation.</p>
+<h2>A compact equation for the assembly hook</h2>
+<p>Let \(A_0\) be total primary antibody, \(S_0\) total secondary conjugate, \(R_0\) total locally available surface receptor, \(K_A\) the primary–receptor dissociation constant, and \(K_S\) the primary–secondary dissociation constant. All five quantities have concentration units, taken here as nM.</p>
+<p>For independent effective 1:1 binding, negligible receptor-mediated depletion of either soluble reagent, uniform exposure, and equilibrium, the soluble primary–secondary complex is</p>
+<p>\[
+C_{\mathrm{eq}}(A_0,S_0)=
+\frac{A_0+S_0+K_S-
+\sqrt{(A_0+S_0+K_S)^2-4A_0S_0}}{2}.
+\]</p>
+<p>The productive surface ternary complex is approximately</p>
+<p>\[
+\boxed{
+T_{\mathrm{eq}}(A_0,S_0;R_0,K_A,K_S)
+\simeq
+\frac{R_0}{2(K_A+A_0)}
+\left[
+A_0+S_0+K_S-
+\sqrt{(A_0+S_0+K_S)^2-4A_0S_0}
+\right].
+}
+\]</p>
+<p>“Productive” here means competent to enter the modeled delivery pathway, not guaranteed to release active payload or kill a cell. The stable numerical implementation evaluates \(C_{\mathrm{eq}}=2A_0S_0/[A_0+S_0+K_S+\sqrt{(A_0+S_0+K_S)^2-4A_0S_0}]\) to avoid subtraction cancellation.</p>
+<p>This equation can hook without an imposed bell-shaped response function. At low \(A_0\), \(C_{\mathrm{eq}}\) grows approximately as \(A_0S_0/(K_S+S_0)\); at very high \(A_0\), \(C_{\mathrm{eq}}\to S_0\) while total receptor occupancy competes with excess unconjugated primary, giving</p>
+<p>\[
+T_{\mathrm{eq}}\sim\frac{R_0S_0}{A_0}\qquad(A_0\to\infty).
+\]</p>
+<p>The concentration at the maximum, under the same assumptions and for \(S_0&gt;0\), is</p>
+<p>\[
+\boxed{
+A_{\mathrm{peak}}=
+\sqrt{K_AK_S}
++S_0\frac{\sqrt{K_A}}{\sqrt{K_A}+\sqrt{K_S}}.
+}
+\]</p>
+<p>Therefore, adding secondary shifts the assembly maximum to a larger total primary concentration in this limiting model. It does not abolish the high-primary asymptote. A hook can disappear from the tested window while remaining in the underlying assembly curve.</p>
+<h3>Derivation and limits</h3>
+<p>Let free primary be \(a\), free secondary \(s\), and free receptor \(r\). At equilibrium, \(C=as/K_S\), \(B=ar/K_A\), and \(T=ars/(K_AK_S)\). With receptor depletion neglected, \(A_0=a+C\); the receptor balance gives \(R_0=r+B+T=r[1+(a+C)/K_A]\), hence \(T=R_0C/(K_A+A_0)\).</p>
+<p>The solution balance gives \(A_0=C+K_SC/(S_0-C)\). Differentiating \(C/[K_A+A_0(C)]\) with respect to \(C\) gives the maximum at \(C/(S_0-C)=\sqrt{K_A/K_S}\); substitution yields \(A_{\mathrm{peak}}\) above.</p>
+<p>If receptor-mediated ligand depletion matters, retain all three local conservation equations:</p>
+<p>\[
+A_{\mathrm{tot}}=a+B+C+T,\qquad
+S_{\mathrm{tot}}=s+C+T,\qquad
+R_{\mathrm{tot}}=r+B+T.
+\]</p>
+<p>Solve these with the equilibrium relationships rather than using the receptor-dilute approximation. The dynamic finite-bath model below instead conserves each reagent across bath, tissue, internalized complexes, and degradation inventories.</p>
+<p>The reduced equation does not predict cell killing, specify a half-maximal lethal concentration, or encode diffusion, preincubation, turnover, multivalency, or signal persistence. These processes must not be disguised as fitted changes in \(K_A\) or \(K_S\).</p>
+<h2>Complete dynamical model</h2>
+<p>The full model has \(3+19n\) states, where \(n\) is the radial-shell count. A three-shell simulation has 60 states. Time is in hours, extracellular and receptor-associated species are nM in the local accessible extracellular volume, payload is model-equivalent copies per initial cell, and cell-state variables are fractions of the initial population.</p>
+<h3>Geometry and unit conversion</h3>
+<p>Let \(a\) now denote organoid radius; the free-primary symbol \(a\) used only in the preceding equilibrium derivation is not used in the dynamical equations. Let \(n_o\) be organoid count, \(\epsilon\) extracellular volume fraction, \(\rho\) cells per tissue \(\mu\mathrm{m}^3\), \(b_j=ja/n\) shell boundaries, and \(c_j=(b_j+b_{j-1})/2\) shell centers.</p>
+<p>\[
+\mathcal V_j=\frac{4\pi n_o}{3}(b_j^3-b_{j-1}^3),\quad
+v_j=\epsilon\mathcal V_j\,10^{-15}\ {\rm L},\quad
+N_j=\rho\mathcal V_j,\quad
+\beta_j=\frac{10^9N_j}{N_{\rm Av}v_j}.
+\]</p>
+<p>\(N_{\rm Av}=6.02214076\times10^{23}\ \mathrm{mol}^{-1}\). Thus \(\beta_j\) converts one molecule per initial cell into nM in the shell's accessible extracellular volume. \(v_b=10^{-6}V_{\rm bath}\) L when <code>bath_ul</code> is specified in µL.</p>
+<p>For \(n&gt;1\), surface receptor copies vary linearly between core and rim:</p>
+<p>\[
+q_j=q_{\rm rim}\left[q_{\rm ratio}+
+(1-q_{\rm ratio})\frac{j-1}{n-1}\right],\qquad
+R_{0j}=\beta_jq_j.
+\]</p>
+<p>For \(n=1\), the implementation uses \(q_1=q_{\rm rim}q_{\rm ratio}\). The default ratio is 1.</p>
+<p>The finite-volume conductance through each shell's outer interface is</p>
+<p>\[
+G_j=D_{\rm eff}\,3600\,
+\frac{4\pi n_ob_j^2\epsilon}{\delta_j}\,10^{-15}\quad({\rm L/h}),
+\]</p>
+<p>where \(\delta_j=c_{j+1}-c_j\) internally and \(\delta_n=a-c_n\) at the outer boundary. For species \(Z\in\{A,S,C\}\), define \(d_A=d_S=1,\ d_C=\chi_C\), and \(Z_{n+1}=Z_b\).</p>
+<p>\[
+\Phi_{Zj}=d_ZG_j(Z_{j+1}-Z_j),\quad
+\mathcal D_{Zj}=\frac{\Phi_{Zj}-\Phi_{Z,j-1}}{v_j},\quad
+\Phi_{Z0}=0.
+\]</p>
+<p>The sphere center is no-flux. The well-mixed finite bath loses exactly the amount entering the outer shell, so diffusion conserves reagent amounts. \(D_{\rm eff}\) is a lumped effective diffusivity; matrix binding and tortuosity are not estimated separately.</p>
+<h3>Reaction network and fluxes</h3>
+<p>\[
+A+S\rightleftharpoons C,\qquad
+A+R\rightleftharpoons B,\qquad
+S+B\rightleftharpoons T,\qquad
+C+R\rightleftharpoons T.
+\]</p>
+<p>\[
+f_{0j}=k^+_SA_jS_j-k^-_SC_j,\quad
+f_{1j}=k^+_AA_jR_j-k^-_AB_j,
+\]
+\[
+f_{2j}=k^+_SS_jB_j-k^-_ST_j,\quad
+f_{3j}=k^+_AC_jR_j-k^-_AT_j.
+\]</p>
+<p>\(k^-_A=k^+_AK_A\), \(k^-_S=k^+_SK_S\). On-rates have units nM\(^{-1}\)h\(^{-1}\); off-rates have units h\(^{-1}\). Equal affinities for corresponding edges impose independent binding and close the thermodynamic cycle; this version has no cooperativity parameter.</p>
+<p>The optional <code>solution_binding=False</code> ablation sets only the association part of \(f_0\) to zero, while preserving soluble-complex dissociation. It is a deliberately nonequilibrium counterfactual for causal isolation, not an alternative physical equilibrium chemistry.</p>
+<h3>Extracellular and bath equations</h3>
+<p>\[
+\dot A_j=\mathcal D_{Aj}-f_{0j}-f_{1j},\quad
+\dot S_j=\mathcal D_{Sj}-f_{0j}-f_{2j},\quad
+\dot C_j=\mathcal D_{Cj}+f_{0j}-f_{3j}.
+\]</p>
+<p>Between addition events:</p>
+<p>\[
+\dot A_b=-f_{0b}-\Phi_{An}/v_b,\quad
+\dot S_b=-f_{0b}-\Phi_{Sn}/v_b,\quad
+\dot C_b=+f_{0b}-\Phi_{Cn}/v_b,
+\]</p>
+<p>with \(f_{0b}=k^+_SA_bS_b-k^-_SC_b\). No washing, medium replacement, or nonspecific extracellular conjugate clearance is applied.</p>
+<h3>Surface receptor, endosomal recycling, and receptor turnover</h3>
+<p>Let \(k_R,k_B,k_T\) be internalization rates for unoccupied receptor, primary-bound receptor, and ternary complex; \(k_{\rm rec}\) the intact recycling rate; and \(k_{\rm deg}\) the common endosomal degradation rate. The endosomal species \(U,V,W\) correspond to internalized \(R,B,T\).</p>
+<p>\[
+\dot R_j=\sigma_j-f_{1j}-f_{3j}-k_RR_j+k_{\rm rec}U_j,
+\]
+\[
+\dot B_j=f_{1j}-f_{2j}-k_BB_j+k_{\rm rec}V_j,\quad
+\dot T_j=f_{2j}+f_{3j}-k_TT_j+k_{\rm rec}W_j,
+\]
+\[
+\dot U_j=k_RR_j-(k_{\rm rec}+k_{\rm deg})U_j,\quad
+\dot V_j=k_BB_j-(k_{\rm rec}+k_{\rm deg})V_j,\quad
+\dot W_j=k_TT_j-(k_{\rm rec}+k_{\rm deg})W_j.
+\]</p>
+<p>\[
+k_{\rm deg}=\ln 2/\tau_R,\qquad
+U_{0j}=\frac{k_RR_{0j}}{k_{\rm rec}+k_{\rm deg}},\qquad
+\sigma_j=k_{\rm deg}U_{0j}.
+\]</p>
+<p>This construction starts untreated receptor pools at steady state. Synthesis is constant per initial-cell scaffold after dosing; it is not a fitted transcriptional feedback response.</p>
+<p>The parameter \(\tau_R\), named <code>receptor_half_life_h</code> in code, is the half-time for degradation of a retained endosomal receptor if recycling were absent. It is <strong>not the measured half-life of the whole cellular receptor pool</strong>. For the unliganded baseline, the pool-normalized degradation flux is</p>
+<p>\[
+k_{\rm turn,baseline}=
+\frac{k_{\rm deg}k_R}{k_{\rm rec}+k_{\rm deg}+k_R}.
+\]</p>
+<p>\(\ln2/k_{\rm turn,baseline}\) is a flux-derived effective turnover timescale, not generally the single-exponential half-life of a pulse-chase trace. Changing \(\tau_R\) also changes the baseline synthesis rate needed to hold initial surface copies fixed.</p>
+<h3>Productive delivery and downstream protein recovery</h3>
+<p>\[
+j_{Pj}=\eta\,d\,k_{\rm deg}W_j/\beta_j,\qquad
+\dot P_j=j_{Pj}-k_PP_j,\qquad
+\dot J_j=j_{Pj},\qquad
+k_P=\ln2/\tau_P.
+\]</p>
+<p>Here \(d\) is effective payload yield per secondary conjugate, \(\eta\) the fraction becoming productive intracellular payload, \(P\) current productive payload, and \(J\) cumulative productive delivery. Payload-equivalent dose is not confused with conjugate-molecule dose.</p>
+<p>\[
+\dot Q_j=k_{\rm dam}
+\frac{P_j}{P_{50}+P_j}(1-Q_j)-k_{\rm rep}Q_j,\qquad
+k_{\rm rep}=\ln2/\tau_Q.
+\]</p>
+<p>\(Q\in[0,1]\) is generic recoverable damage or functional-protein deficit. \(\tau_Q\) is a downstream protein-recovery half-time, not receptor turnover. This phenomenological module can represent recovery by protein replacement or repair, but it does not claim a named payload's molecular mechanism. Payload mechanism-specific models should replace it rather than merely rename its parameters.</p>
+<h3>Cell-state equations and reporter persistence</h3>
+<p>\[
+h_j=h_{\max}\frac{Q_j^m}{Q_{50}^m+Q_j^m},\qquad
+\dot L_j=-h_jL_j,\qquad
+\dot E_j=h_jL_j-E_j/\tau_m,
+\]
+\[
+\dot D_j=E_j/\tau_m-k_FD_j,\qquad
+\dot X_j=k_FD_j,\qquad
+\dot H_j=E_j/\tau_m-k_HH_j.
+\]</p>
+<p>\(L\) is not yet irreversibly committed to death; \(E\) is committed but not yet membrane-permeable; \(D\) is permeabilized, reporter-accessible material; \(X\) is permeabilized material no longer visible to this reporter. \(H\) is a separate release-and-decay reporter proxy. \(L+E+D+X=1\); \(1-L\) is cumulative death commitment and \(D+X\) is cumulative membrane permeabilization.</p>
+<p>\(\tau_m\) is a mean waiting time for membrane permeabilization, not a half-life. Default \(k_F=0\): no-wash reporter-accessible material accumulates monotonically in time. Nonzero \(k_F\) represents optional loss of reportable material; no claim is made that a particular commercial dye has this behavior. Fluorescence saturation alone is monotone and cannot turn a monotone reporter population into a hook.</p>
+<h3>Observation equations</h3>
+<p>Define initial-cell weights \(w_j=N_j/\sum N_j\), optical weights \(o_j\) linearly spaced from \(o_{\rm core}\) to 1, and \(\langle Z\rangle=\sum_jw_jZ_j\). For a one-shell model the optical weight is \(o_{\rm core}\).</p>
+<p>\[
+u_F(t)=\frac{\sum_jw_jo_jD_j(t)}{\sum_jw_jo_j},\qquad
+\boxed{F_{\rm norm}(t)=\frac{(1+\kappa)u_F(t)}{1+\kappa u_F(t)}}.
+\]</p>
+<p>This normalizes the hypothetical fully permeabilized initial population to 1 with the same optical weighting. Raw instrument units would additionally require empirical background \(F_{\rm bg}\) and gain \(g_F\): \(F_{\rm raw}=F_{\rm bg}+g_FF_{\rm norm}\). Neither background nor gain is estimated or configurable in this version.</p>
+<p>\[
+Y_{\rm ATP}=\langle(L+E)(1-\zeta Q)\rangle,\quad
+Y_{\rm caspase}=\langle E\rangle,\quad
+Y_{\rm LDH}=\langle H\rangle.
+\]</p>
+<p>These are deliberately distinct observation operators. The ATP proxy assumes committed but not yet permeabilized cells retain some metabolic signal; the caspase proxy is a committed-state signal, not a calibrated protease reaction.</p>
+<p>\[
+Y_{\rm surface}=\langle T/\beta\rangle,\quad
+Y_{\rm endosome}=\langle W/\beta\rangle,\quad
+Y_{\rm payload}=\langle P\rangle,\quad
+Y_{\rm delivered}=\langle J\rangle.
+\]</p>
+<p>Endosomal complex copies are not themselves a pH-sensitive fluorescence calibration or proof of lysosomal drug release. The distinction between endosomal detection and lysosomal delivery is explicitly discussed in the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4708616/">published internalization-assay study</a>.</p>
+<h3>Dosing events and incubation order</h3>
+<p>Let \(A_{\rm dose},S_{\rm dose}\) be nominal final-well concentrations and \(v_{\rm tot}=v_b+\sum v_j\). Adding \(A\) changes bath concentration by \(A_{\rm dose}v_{\rm tot}/v_b\); adding \(S\) changes it by \(S_{\rm dose}v_{\rm tot}/v_b\). Injection volume is assumed negligible. Soluble concentrations in organoid shells initially equal zero.</p>
+<p>Simultaneous addition applies both jumps at \(t=0\). Primary-first applies \(A\) at 0 and \(S\) at \(\Delta\); secondary-first does the reverse. The event is applied without resetting any prior state. Zero delay is exactly simultaneous addition.</p>
+<p>For equilibrium-precomplexed addition, compute \(C_0\) with the solution quadratic using the bath doses, then set \((A_b,S_b,C_b)=(A_{\rm bath}-C_0,S_{\rm bath}-C_0,C_0)\) at \(t=0\). This is the equilibrium preincubation limit, not a finite-time precomplexing model. It assumes solution complex can subsequently bind target with the same primary affinity.</p>
+<p>All other initial states are zero except \(R=R_0,\ U=U_0,\ L=1\). The browser uses \(\Delta=6\) h and endpoints 24, 48, 72 h from first addition. Python accepts other delays and durations, and <code>results/sensitivity.json</code> compares both clocks: fixed endpoint from first addition and fixed combined-reagent exposure after second addition.</p>
+<h2>Complete state-variable dictionary</h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>first 3 states</td>
+<td>\(A_b,S_b,C_b\)</td>
+<td>Free primary, free secondary conjugate, soluble complex in bath</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>A,S,C</code></td>
+<td>\(A_j,S_j,C_j\)</td>
+<td>Corresponding soluble species in shell \(j\)</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>\(R_j\)</td>
+<td>Unoccupied surface receptor</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>\(B_j\)</td>
+<td>Surface primary–receptor complex</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>\(T_j\)</td>
+<td>Surface primary–secondary–receptor complex</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>U,V,W</code></td>
+<td>\(U_j,V_j,W_j\)</td>
+<td>Internalized unoccupied, primary-bound, and ternary receptor</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>\(P_j\)</td>
+<td>Current productive intracellular payload</td>
+<td>model-equivalent copies/cell</td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>\(Q_j\)</td>
+<td>Recoverable damage / functional-protein deficit</td>
+<td>fraction</td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>\(L_j\)</td>
+<td>Not irreversibly committed</td>
+<td>fraction</td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td>\(E_j\)</td>
+<td>Committed, not yet permeabilized</td>
+<td>fraction</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>\(D_j\)</td>
+<td>Permeabilized and reporter-accessible</td>
+<td>fraction</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>\(X_j\)</td>
+<td>Permeabilized but no longer reporter-accessible</td>
+<td>fraction</td>
+</tr>
+<tr>
+<td><code>LA</code></td>
+<td>\(\Lambda_{Aj}\)</td>
+<td>Cumulative degraded primary inventory</td>
+<td>nM equivalent</td>
+</tr>
+<tr>
+<td><code>LS</code></td>
+<td>\(\Lambda_{Sj}\)</td>
+<td>Cumulative degraded secondary inventory</td>
+<td>nM equivalent</td>
+</tr>
+<tr>
+<td><code>J</code></td>
+<td>\(J_j\)</td>
+<td>Cumulative productive payload delivered</td>
+<td>model-equivalent copies/cell</td>
+</tr>
+<tr>
+<td><code>H</code></td>
+<td>\(H_j\)</td>
+<td>Release-and-decay / LDH-like reporter</td>
+<td>normalized units</td>
+</tr>
+</tbody>
+</table>
+<p>\[
+\dot\Lambda_{Aj}=k_{\rm deg}(V_j+W_j),\qquad
+\dot\Lambda_{Sj}=k_{\rm deg}W_j.
+\]</p>
+<p>These two bookkeeping states do not generate biological effects; they close antibody inventory balances.</p>
+<h2>Complete parameter dictionary</h2>
+<p>Every numerical default below is an illustrative assumption. Literature motivates the existence of the process, not the assigned default. Browser trafficking presets and lab overrides are recorded alongside the data.</p>
+<table>
+<thead>
+<tr>
+<th>Code parameter</th>
+<th>Symbol</th>
+<th style="text-align: right;">Default</th>
+<th>Unit / interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shells</code></td>
+<td>\(n\)</td>
+<td style="text-align: right;">3</td>
+<td>Radial shells</td>
+</tr>
+<tr>
+<td><code>radius_um</code></td>
+<td>\(a\)</td>
+<td style="text-align: right;">150</td>
+<td>µm</td>
+</tr>
+<tr>
+<td><code>organoids</code></td>
+<td>\(n_o\)</td>
+<td style="text-align: right;">20</td>
+<td>Identical spheres in shared bath</td>
+</tr>
+<tr>
+<td><code>bath_ul</code></td>
+<td>\(V_{\rm bath}\)</td>
+<td style="text-align: right;">100</td>
+<td>µL</td>
+</tr>
+<tr>
+<td><code>extracellular_fraction</code></td>
+<td>\(\epsilon\)</td>
+<td style="text-align: right;">0.2</td>
+<td>Accessible extracellular fraction</td>
+</tr>
+<tr>
+<td><code>cells_per_tissue_um3</code></td>
+<td>\(\rho\)</td>
+<td style="text-align: right;">0.0005</td>
+<td>Initial cells/µm³</td>
+</tr>
+<tr>
+<td><code>copies_per_cell</code></td>
+<td>\(q_{\rm rim}\)</td>
+<td style="text-align: right;">100000</td>
+<td>Initial surface copies per rim cell</td>
+</tr>
+<tr>
+<td><code>core_copy_ratio</code></td>
+<td>\(q_{\rm ratio}\)</td>
+<td style="text-align: right;">1</td>
+<td>Core/rim copy ratio</td>
+</tr>
+<tr>
+<td><code>diffusion_um2_s</code></td>
+<td>\(D_{\rm eff}\)</td>
+<td style="text-align: right;">3</td>
+<td>µm²/s</td>
+</tr>
+<tr>
+<td><code>complex_diffusion_ratio</code></td>
+<td>\(\chi_C\)</td>
+<td style="text-align: right;">0.65</td>
+<td>Complex / free-conjugate diffusivity</td>
+</tr>
+<tr>
+<td><code>kon_a</code></td>
+<td>\(k^+_A\)</td>
+<td style="text-align: right;">0.36</td>
+<td>nM⁻¹h⁻¹</td>
+</tr>
+<tr>
+<td><code>kd_a_nm</code></td>
+<td>\(K_A\)</td>
+<td style="text-align: right;">1</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>kon_s</code></td>
+<td>\(k^+_S\)</td>
+<td style="text-align: right;">0.36</td>
+<td>nM⁻¹h⁻¹</td>
+</tr>
+<tr>
+<td><code>kd_s_nm</code></td>
+<td>\(K_S\)</td>
+<td style="text-align: right;">0.3</td>
+<td>nM</td>
+</tr>
+<tr>
+<td><code>solution_binding</code></td>
+<td>association switch</td>
+<td style="text-align: right;">true</td>
+<td>Disables only solution association if false</td>
+</tr>
+<tr>
+<td><code>kint_free</code></td>
+<td>\(k_R\)</td>
+<td style="text-align: right;">0.04</td>
+<td>h⁻¹</td>
+</tr>
+<tr>
+<td><code>kint_primary</code></td>
+<td>\(k_B\)</td>
+<td style="text-align: right;">0.12</td>
+<td>h⁻¹</td>
+</tr>
+<tr>
+<td><code>kint_ternary</code></td>
+<td>\(k_T\)</td>
+<td style="text-align: right;">0.12</td>
+<td>h⁻¹</td>
+</tr>
+<tr>
+<td><code>krecycle</code></td>
+<td>\(k_{\rm rec}\)</td>
+<td style="text-align: right;">0.06</td>
+<td>h⁻¹</td>
+</tr>
+<tr>
+<td><code>receptor_half_life_h</code></td>
+<td>\(\tau_R\)</td>
+<td style="text-align: right;">12</td>
+<td>Conditional endosomal degradation half-time, h</td>
+</tr>
+<tr>
+<td><code>payload_yield</code></td>
+<td>\(d\)</td>
+<td style="text-align: right;">1</td>
+<td>Model-equivalent payload units per secondary</td>
+</tr>
+<tr>
+<td><code>release_efficiency</code></td>
+<td>\(\eta\)</td>
+<td style="text-align: right;">0.2</td>
+<td>Productive release fraction</td>
+</tr>
+<tr>
+<td><code>payload_half_life_h</code></td>
+<td>\(\tau_P\)</td>
+<td style="text-align: right;">12</td>
+<td>Intracellular productive payload half-life, h</td>
+</tr>
+<tr>
+<td><code>payload_p50</code></td>
+<td>\(P_{50}\)</td>
+<td style="text-align: right;">1000</td>
+<td>Payload copies/cell at half-maximal damage induction</td>
+</tr>
+<tr>
+<td><code>damage_rate_h</code></td>
+<td>\(k_{\rm dam}\)</td>
+<td style="text-align: right;">0.15</td>
+<td>h⁻¹</td>
+</tr>
+<tr>
+<td><code>protein_recovery_half_life_h</code></td>
+<td>\(\tau_Q\)</td>
+<td style="text-align: right;">24</td>
+<td>Generic downstream protein-recovery half-time, h</td>
+</tr>
+<tr>
+<td><code>death_rate_h</code></td>
+<td>\(h_{\max}\)</td>
+<td style="text-align: right;">0.12</td>
+<td>Maximum commitment hazard, h⁻¹</td>
+</tr>
+<tr>
+<td><code>damage_half</code></td>
+<td>\(Q_{50}\)</td>
+<td style="text-align: right;">0.45</td>
+<td>Half-maximal hazard damage fraction</td>
+</tr>
+<tr>
+<td><code>hill</code></td>
+<td>\(m\)</td>
+<td style="text-align: right;">3</td>
+<td>Hazard Hill exponent</td>
+</tr>
+<tr>
+<td><code>membrane_delay_h</code></td>
+<td>\(\tau_m\)</td>
+<td style="text-align: right;">6</td>
+<td>Mean commitment-to-permeabilization delay, h</td>
+</tr>
+<tr>
+<td><code>reporter_loss_h</code></td>
+<td>\(k_F\)</td>
+<td style="text-align: right;">0</td>
+<td>Loss of accessible reporter material, h⁻¹</td>
+</tr>
+<tr>
+<td><code>ldh_loss_h</code></td>
+<td>\(k_H\)</td>
+<td style="text-align: right;">0.03</td>
+<td>Release-reporter decay, h⁻¹</td>
+</tr>
+<tr>
+<td><code>optical_core_weight</code></td>
+<td>\(o_{\rm core}\)</td>
+<td style="text-align: right;">0.7</td>
+<td>Relative core optical weight</td>
+</tr>
+<tr>
+<td><code>fluorescence_saturation</code></td>
+<td>\(\kappa\)</td>
+<td style="text-align: right;">0</td>
+<td>Dimensionless monotonic observation saturation</td>
+</tr>
+<tr>
+<td><code>atp_suppression</code></td>
+<td>\(\zeta\)</td>
+<td style="text-align: right;">0.35</td>
+<td>Damage-associated ATP-proxy suppression</td>
+</tr>
+</tbody>
+</table>
+<p>The dosing/API arguments are <code>primary_nm</code> (\(A_{\rm dose}\), default 10 nM), <code>secondary_nm</code> (\(S_{\rm dose}\), default 1 nM), <code>duration_h</code> (\(t_{\rm end}\), default 72 h), <code>order</code> (default simultaneous), <code>delay_h</code> (\(\Delta\), default 6 h), <code>p</code> (parameter object), and <code>times</code> (strictly increasing observation times, default 145 equally spaced samples). Numerical solver settings are <code>rtol=2e-6</code>, <code>atol=1e-9</code>, and LSODA integration with exact restarts at addition events. Absolute tolerance applies to mixed state units and is a numerical control, not an experimental uncertainty.</p>
+<p>The browser atlas scans \(q_{\rm rim}=10^4,10^5,10^6\); \(\tau_R=4,24,96\) h; \(S_{\rm dose}=0.1,3,100\) nM; and 13 log-spaced primary doses from 0.01 to 1000 nM. “Slow” trafficking uses \((k_R,k_B,k_T,k_{\rm rec})=(0.01,0.02,0.02,0.02)\) h⁻¹; “recycling” uses \((0.08,0.4,0.4,0.5)\); “retained” uses \((0.04,0.2,0.2,0.02)\). The atlas initial selection is not the package-default kinetic parameter set; the mechanism lab's reference scenario is.</p>
+<h2>Inventory, hook definition, and numerical verification</h2>
+<p>Total primary amount in nM·L is</p>
+<p>\[
+M_A=v_b(A_b+C_b)+
+\sum_jv_j(A_j+C_j+B_j+T_j+V_j+W_j+\Lambda_{Aj}),
+\]</p>
+<p>and total secondary is</p>
+<p>\[
+M_S=v_b(S_b+C_b)+
+\sum_jv_j(S_j+C_j+T_j+W_j+\Lambda_{Sj}).
+\]</p>
+<p>Both remain constant between addition events. The tests also check nonnegative states within numerical tolerance, \(L+E+D+X=1\), zero-primary / zero-secondary / zero-target / zero-release controls, zero-delay order equivalence, and tighter solver tolerances.</p>
+<p>For a nonnegative response \(Y\) on an increasing primary-dose grid, the descriptive hook depth is</p>
+<p>\[
+H_{\rm hook}=\max\left(0,1-\frac{Y(A_{\max})}{\max_iY(A_i)}\right).
+\]</p>
+<p>A normalized-response flag requires an interior sampled peak, peak response at least 0.05, and decline at least 0.10. These are analyst-selected descriptive thresholds, not a significance test or universal assay acceptance criterion. Multiple local extrema can occur; the summary is not a curve fit, EC50, or mechanistic diagnosis. Raw molecule-count outputs and ATP-like viability are not assigned the same normalized hook flag in the browser.</p>
+<p><code>results/sensitivity.json</code> records numerical ablation, delay, and spatial-resolution checks. At 10 nM primary / 3 nM secondary / 72 h, the reference fluorescence is approximately 0.9851, 0.9854, and 0.9855 for 3, 6, and 12 shells. In the large/slow-transport stress case the corresponding values are 0.291, 0.389, and 0.260: <strong>that stress case is not spatially converged and must not be used for quantitative transport inference</strong>. The default atlas is an exploratory coarse model; reference-case agreement does not validate every parameter combination.</p>
+<h2>Structural uncertainty and empirical calibration</h2>
+<p>This model can reproduce a hook and a shift with secondary concentration. It cannot establish that either event in a real assay has the same cause. Secondary rescue can reflect altered assembly, availability, uptake, toxicity, or reporter behavior; several combinations can produce similar output curves.</p>
+<p>Finite effective 1:1:1 stoichiometry omits real secondary valency, cross-linking, avidity, aggregate-size distributions, and concentration-dependent trafficking. There is no nonspecific conjugate uptake, extracellular cleavage, free-payload killing, bystander transport, growth, changing organoid geometry, or cell-cycle dependence. The receptor/delivery subsystem remains active on a fixed initial-cell scaffold after death commitment; this is a serious late-time limitation, not a claim about dead-cell trafficking.</p>
+<p>The minimum identification strategy separates surface copies, unoccupied versus liganded internalization, recycling versus degradation, intracellular productive payload, direct cell-state change, and reporter response. Target-negative and secondary-only observations are particularly important because this version predicts exactly zero target-independent toxicity by construction. A mismatch requires extending the model, not changing the experimental result.</p>
+<p>The geometric and turnover mechanisms are motivated by <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2831054/">published spheroid-penetration experiments</a>; the assembly mechanism has a direct no-wash precedent in <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5842027/">cell-surface antibody detection</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4708616/">homogeneous internalization assays</a>. These studies do not supply a calibrated parameter set for this simulator.</p></main><script>document.getElementById('reader-theme').onclick=function(){var d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'light':'dark';this.textContent=d?'Dark mode':'Light mode';};</script></body></html>
