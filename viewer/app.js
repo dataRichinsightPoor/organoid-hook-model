@@ -67,7 +67,7 @@ function render(){
  const max=Math.max(...y.flat());
  const ymax=isCount?Math.max(1,max*1.08):1;
  $("count").textContent=`${(atlas.simulation_count+lab.simulation_count).toLocaleString()} synthetic simulations · 3 observation times`;
- $("context").textContent=`${mode==="atlas"?"Receptor atlas":activeData.cases[$("case").value].name} · ${activeData.times_h[ti]} h from first addition · no wash`;
+ $("context").textContent=`${mode==="atlas"?"Receptor atlas":activeData.cases[$("case").value].name} · ${activeData.times_h[ti]} h from first addition · accumulation`;
  $("case-description").textContent=descriptions[$("case").value]||"";
  $("plot-title").textContent=labels[field];
  $("y-description").textContent=isCount?"Model-equivalent copies per initial cell; not experimental molecule counts.":field==="permeability_fluorescence"?"Normalized to a modeled, fully permeabilized initial population.":"Normalized model state or generic reporter signal; not a calibrated commercial assay.";

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A synthetic, no-wash secondary-conjugate assay atlas separating assembly, trafficking, transport, and readout.">
+  <meta name="description" content="A synthetic accumulation-format secondary-conjugate assay atlas separating assembly, trafficking, transport, and readout.">
   <title>Organoid Hook Model | Data-Rich, Insight-Poor</title>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -34,7 +34,7 @@
     <label for="case">Isolated assumption</label><select id="case"></select>
     <p class="control-note" id="case-description"></p>
   </div>
-  <label for="order">Order of addition · no wash</label>
+  <label for="order">Order of addition · accumulation</label>
   <select id="order"><option value="simultaneous">Simultaneous</option><option value="primary_first">Primary first → secondary at 6 h</option><option value="secondary_first">Secondary first → primary at 6 h</option><option value="precomplexed">Precomplexed at equilibrium</option></select>
   <label for="time">Read time from first addition</label>
   <select id="time"><option value="0">24 h</option><option value="1">48 h</option><option value="2" selected>72 h</option></select>
@@ -76,7 +76,7 @@
     <div class="section-label">WORKED EXAMPLE · SAME PYTHON MODEL</div>
     <h2 id="trace-title">Follow one simulation</h2>
     <p class="trace-lede">Start with 100,000 surface receptors per cell. Follow assembly, productive delivery, damage, and the signal that becomes visible later.</p>
-    <p class="small muted">Fixed Reference biology · 150 µm radius · simultaneous addition · no wash. This section is independent of the explorer controls above. Every snapshot is computed, not interpolated.</p>
+    <p class="small muted">Fixed Reference biology · 150 µm radius · simultaneous addition · accumulation. This section is independent of the explorer controls above. Every snapshot is computed, not interpolated.</p>
     <div class="trace-controls">
       <div><label for="trace-case">Reagent condition</label><select id="trace-case" disabled>
         <option value="sampled_peak">Sampled peak · A 8.254 / S 3 nM</option>

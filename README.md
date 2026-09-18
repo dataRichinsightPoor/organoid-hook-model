@@ -1,6 +1,6 @@
 # Organoid Hook Model
 
-A no-install, no-wash secondary-conjugate assay explorer for Data-Rich, Insight-Poor. A mechanistic Python model separates reagent assembly, receptor trafficking, finite-bath transport, productive payload delivery, recoverable damage, and the observation process.
+A no-install, accumulation-format secondary-conjugate assay explorer for Data-Rich, Insight-Poor — CCXXIV. A mechanistic Python model separates reagent assembly, receptor trafficking, finite-bath transport, productive payload delivery, recoverable damage, and the observation process.
 
 **All results are synthetic. All default parameters are illustrative assumptions. This is an uncalibrated hypothesis generator, not a predictor of a specific antibody, receptor, toxin, organoid, or commercial assay.**
 
@@ -18,7 +18,7 @@ The [LinkedIn and Substack publication kit](publication/README.md) contains the 
 
 - **Receptor atlas:** 4,212 simulations across 10,000 / 100,000 / 1,000,000 initial surface copies per cell, three trafficking archetypes, three endosomal receptor degradation half-times, four orders of addition, and two-dimensional primary / secondary concentration combinations.
 - **Mechanism lab:** 1,092 additional simulations isolating transport geometry, target-poor cores, downstream protein-recovery kinetics, productive release, and optional reporter loss.
-- **No-wash accumulation:** simultaneous addition, primary first, secondary first, and equilibrium-precomplexed addition. Delayed additions are 6 h apart in the browser atlas. No medium or reagent is removed.
+- **Accumulation format:** simultaneous addition, primary first, secondary first, and equilibrium-precomplexed addition. Delayed additions are 6 h apart in the browser atlas. No medium or reagent is removed.
 - **Time-resolved comparisons:** 24, 48, and 72 h from first addition, with both biological state and reporter output. Exposure-clock sensitivity is provided separately.
 - **Assay extensions:** permeability-dye fluorescence, ATP-like metabolic signal, committed-state/caspase proxy, LDH-like reporter, surface ternary complex, endosomal complex, and payload delivery. These are generic observation models, not fitted kit calibrations.
 - **Downloadable evidence:** browser CSV, JSON parameter exports, complete atlas JSON, documented equations, reproducible figures, unit tests, citation metadata, and a versioned release.

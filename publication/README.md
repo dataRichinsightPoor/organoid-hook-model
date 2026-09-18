@@ -1,6 +1,6 @@
 # The Hook Is a Property of the System: Publication Kit
 
-Data-Rich, Insight-Poor · Ermelinda Damko
+Data-Rich, Insight-Poor — CCXXIV · Ermelinda Damko
 
 This package prepares the same essay for publication on LinkedIn and Substack. It contains no platform-specific promotional copy inside the manuscript and does not publish to either service.
 
@@ -20,7 +20,7 @@ Title: The Hook Is a Property of the System
 
 Subtitle: Why restoring a cytotoxicity curve can leave a delivery deficit unresolved
 
-Series: Data-Rich, Insight-Poor
+Series: Data-Rich, Insight-Poor — CCXXIV
 
 The essay is self-contained. Link readers to the [public atlas](https://datarichinsightpoor.github.io/organoid-hook-model/) for interactive comparisons, the [worked simulation](https://datarichinsightpoor.github.io/organoid-hook-model/#follow-one-simulation) for the numerical trace, and the [repository](https://github.com/dataRichinsightPoor/organoid-hook-model) for equations, parameters, and tests. The essay already includes these links where they support the argument.
 

@@ -34,7 +34,7 @@ def compose():
         return img.height
 
     d.line((80,106,145,106),fill=CYAN,width=3)
-    text(80,126,"DATA-RICH, INSIGHT-POOR",25,CYAN)
+    text(80,126,"Data-Rich, Insight-Poor — CCXXIV",25,CYAN)
     for i,line in enumerate(["The Hook Is a","Property of","the System"]):
         text(76,216+i*95,line,77,bold=True)
     for i,line in enumerate([
@@ -57,7 +57,7 @@ def compose():
     text(80,974,"organoid-hook-model",22,MUTED)
     text(80,1020,"Ermelinda Damko",24,FG)
 
-    text(860,125,"THE PUBLIC MODEL · 72 HOURS · NO WASH",22,CYAN)
+    text(860,125,"THE PUBLIC MODEL · 72 HOURS · ACCUMULATION",22,CYAN)
     capture("reference-curves.png",860,174,980)
     text(864,584,"Same biology. Three secondary concentrations.",25,MUTED)
     text(864,618,"A recovered endpoint can conceal reduced delivery.",25,MUTED)

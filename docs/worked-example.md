@@ -6,7 +6,7 @@ This is a numerical walkthrough of the published [v0.1.0 implementation](https:/
 
 ## The chosen system
 
-Use **Mechanism lab → Reference**, not the separate receptor-atlas default, in the [public explorer](https://datarichinsightpoor.github.io/organoid-hook-model/). Choose simultaneous addition, 72 hours, no wash, and permeability fluorescence; compare the 3 nM and 100 nM secondary curves.
+Use **Mechanism lab → Reference**, not the separate receptor-atlas default, in the [public explorer](https://datarichinsightpoor.github.io/organoid-hook-model/). Choose simultaneous addition, 72 hours, accumulation, and permeability fluorescence; compare the 3 nM and 100 nM secondary curves.
 
 The main trajectory uses 8.254 nM primary and 3 nM secondary. The primary dose is the highest-fluorescence point on the published 13-dose reference grid at 72 hours, not a continuously optimized peak and not the analytical equilibrium peak.
 

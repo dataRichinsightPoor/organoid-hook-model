@@ -148,7 +148,7 @@ Between addition events:
 \dot C_b=+f_{0b}-\Phi_{Cn}/v_b,
 \]
 
-with \(f_{0b}=k^+_SA_bS_b-k^-_SC_b\). No washing, medium replacement, or nonspecific extracellular conjugate clearance is applied.
+with \(f_{0b}=k^+_SA_bS_b-k^-_SC_b\). The accumulation format retains added reagents; no medium replacement, reagent removal, or nonspecific extracellular conjugate clearance is applied.
 
 ### Surface receptor, endosomal recycling, and receptor turnover
 
@@ -218,7 +218,7 @@ h_j=h_{\max}\frac{Q_j^m}{Q_{50}^m+Q_j^m},\qquad
 
 \(L\) is not yet irreversibly committed to death; \(E\) is committed but not yet membrane-permeable; \(D\) is permeabilized, reporter-accessible material; \(X\) is permeabilized material no longer visible to this reporter. \(H\) is a separate release-and-decay reporter proxy. \(L+E+D+X=1\); \(1-L\) is cumulative death commitment and \(D+X\) is cumulative membrane permeabilization.
 
-\(\tau_m\) is a mean waiting time for membrane permeabilization, not a half-life. Default \(k_F=0\): no-wash reporter-accessible material accumulates monotonically in time. Nonzero \(k_F\) represents optional loss of reportable material; no claim is made that a particular commercial dye has this behavior. Fluorescence saturation alone is monotone and cannot turn a monotone reporter population into a hook.
+\(\tau_m\) is a mean waiting time for membrane permeabilization, not a half-life. Default \(k_F=0\): retained reporter-accessible material accumulates monotonically in time. Nonzero \(k_F\) represents optional loss of reportable material; no claim is made that a particular commercial dye has this behavior. Fluorescence saturation alone is monotone and cannot turn a monotone reporter population into a hook.
 
 ### Observation equations
 
@@ -368,4 +368,4 @@ Finite effective 1:1:1 stoichiometry omits real secondary valency, cross-linking
 
 The minimum identification strategy separates surface copies, unoccupied versus liganded internalization, recycling versus degradation, intracellular productive payload, direct cell-state change, and reporter response. Target-negative and secondary-only observations are particularly important because this version predicts exactly zero target-independent toxicity by construction. A mismatch requires extending the model, not changing the experimental result.
 
-The geometric and turnover mechanisms are motivated by [published spheroid-penetration experiments](https://pmc.ncbi.nlm.nih.gov/articles/PMC2831054/); the assembly mechanism has a direct no-wash precedent in [cell-surface antibody detection](https://pmc.ncbi.nlm.nih.gov/articles/PMC5842027/) and [homogeneous internalization assays](https://pmc.ncbi.nlm.nih.gov/articles/PMC4708616/). These studies do not supply a calibrated parameter set for this simulator.
+The geometric and turnover mechanisms are motivated by [published spheroid-penetration experiments](https://pmc.ncbi.nlm.nih.gov/articles/PMC2831054/); the assembly mechanism has a direct homogeneous-format precedent in [cell-surface antibody detection](https://pmc.ncbi.nlm.nih.gov/articles/PMC5842027/) and [homogeneous internalization assays](https://pmc.ncbi.nlm.nih.gov/articles/PMC4708616/). These studies do not supply a calibrated parameter set for this simulator.

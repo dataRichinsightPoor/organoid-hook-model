@@ -91,7 +91,7 @@ def figures(lab,sensitivity):
         ax.set(title=title,xlabel="Primary antibody (nM)",ylabel="Permeability reporter (normalized)",ylim=(-.02,1.03))
         ax.grid(axis="y",alpha=.13)
     axs[0,0].legend(frameon=False,fontsize=9,loc="upper left")
-    fig.suptitle("The Hook Is a Property of the System\nSynthetic no-wash simulations at 72 h; illustrative parameters, not experimental estimates",fontsize=17)
+    fig.suptitle("The Hook Is a Property of the System\nSynthetic accumulation-format simulations at 72 h; illustrative parameters, not experimental estimates",fontsize=17)
     (ROOT/"figures").mkdir(exist_ok=True)
     fig.savefig(ROOT/"figures/mechanism-map.png",dpi=180)
     fig.savefig(ROOT/"figures/mechanism-map.svg",metadata={"Date":None})
@@ -109,5 +109,18 @@ def figures(lab,sensitivity):
     fig.savefig(ROOT/"figures/readout-separation.png",dpi=180)
     fig.savefig(ROOT/"figures/readout-separation.svg",metadata={"Date":None})
     plt.close(fig)
+    for name in ("mechanism-map.svg","readout-separation.svg"):
+        path=ROOT/"figures"/name
+        path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines())+"\n")
 
-if __name__=="__main__":main()
+if __name__=="__main__":
+    import argparse
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--figures-only",action="store_true",
+                        help="Render committed simulation data without rerunning the model.")
+    args=parser.parse_args()
+    if args.figures_only:
+        figures(json.loads((ROOT/"viewer/lab.json").read_text()),
+                json.loads((ROOT/"results/sensitivity.json").read_text()))
+    else:
+        main()
