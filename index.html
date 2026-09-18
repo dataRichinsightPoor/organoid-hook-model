@@ -15,12 +15,22 @@
   <div class="brand"><svg aria-label="Organoid Hook Model logo" viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 21C10 21 9 9 15 9S21 23 28 19" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Data-Rich, Insight-Poor <span class="subbrand">/ Executable evidence</span></span></div>
   <nav aria-label="Project links"><a href="#follow-one-simulation">Follow one simulation</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model" target="_blank" rel="noopener">GitHub</a><a href="equations.html">Equations & variables</a><button id="theme" type="button" aria-label="Toggle color theme">Light mode</button></nav>
 </header>
+<details id="start-here" class="start-guide" open>
+  <summary><strong>Start here</strong><span class="start-guide-subtitle">A first pass through the model. No installation needed.</span></summary>
+  <ol class="start-guide-steps">
+    <li><a href="#explorer">Compare the reference curves</a><p>Begin with the default settings and compare the three secondary concentrations. Every curve is simulated, not measured.</p></li>
+    <li><a href="#follow-one-simulation">Follow one simulation</a><p>Trace receptor copies through surface assembly, productive payload, and fluorescence before exploring more settings.</p></li>
+    <li><a href="#readout">Compare signal with delivery</a><p>Change “Permeability fluorescence” to “Cumulative productive delivery.” Then vary one receptor, trafficking, or timing setting at a time.</p></li>
+    <li><a href="equations.html">Inspect the mathematics</a><p>Read the <a href="article.html">illustrated article</a> or <a href="https://github.com/dataRichinsightPoor/organoid-hook-model/tree/main/src/organoid_hook">Python code</a>. Use the <a href="https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb">Colab notebook</a> to run new parameter combinations.</p></li>
+  </ol>
+  <p class="start-guide-boundary">The browser displays precomputed scenarios; it does not fit your data or solve arbitrary new settings. This uncalibrated model explores assumptions, not your assay’s predicted potency.</p>
+</details>
 <div class="layout">
 <aside aria-label="Simulation controls">
   <div class="section-label">EXPLORER / v0.1.0</div>
   <h1>Organoid<br>Hook Model</h1>
   <p class="muted intro">Separate the curve from the mechanism.</p>
-  <p class="control-note"><a href="#follow-one-simulation">New here? Follow one simulation →</a></p>
+  <p class="control-note"><a href="#start-here">New here? Start here →</a></p>
   <div class="tabs" role="group" aria-label="Explorer mode"><button class="active" id="atlas-mode" aria-pressed="true">Receptor atlas</button><button id="lab-mode" aria-pressed="false">Mechanism lab</button></div>
   <div id="atlas-controls">
     <label for="copies">Initial surface copies / cell</label>
@@ -51,7 +61,7 @@
   <div class="topline"><span class="badge">SYNTHETIC · UNCALIBRATED</span><span id="count" class="muted">Loading evidence…</span></div>
   <section class="heading-row"><div><h2>More reagent. A different system.</h2><p id="context" class="muted">Loading computed scenarios…</p></div><button id="csv" disabled>Export displayed CSV</button></section>
   <div id="error" role="alert" hidden></div>
-  <section class="plot-card">
+  <section class="plot-card" id="explorer">
     <div class="plot-heading"><div><h3 id="plot-title">Primary × secondary concentration</h3><p class="muted small" id="y-description">Normalized to a modeled, fully permeabilized initial population.</p></div><button id="png" disabled>Save chart</button></div>
     <div class="legend" aria-label="Secondary concentration legend"><span><i class="line one"></i>0.1 nM secondary</span><span><i class="line two"></i>3 nM secondary</span><span><i class="line three"></i>100 nM secondary</span></div>
     <div class="canvas-wrap"><canvas id="curve" role="img" aria-label="Dose-response curves for three secondary-conjugate concentrations. Exact values are available in the table below."></canvas></div>
