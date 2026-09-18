@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software or its synthetic examples, please cite this version."
+title: "Organoid Hook Model: a no-wash secondary-conjugate assay simulator"
+type: software
+authors:
+  - family-names: Damko
+    given-names: Ermelinda
+version: 0.1.0
+date-released: 2026-09-18
+license: MIT
+repository-code: "https://github.com/dataRichinsightPoor/organoid-hook-model"
+url: "https://datarichinsightpoor.github.io/organoid-hook-model/"
+abstract: >-
+  An uncalibrated finite-volume reaction-transport model and browser atlas
+  for generic no-wash secondary-conjugate assays in tumor-organoid-like
+  geometry. Separates assembly, trafficking, receptor turnover, productive
+  delivery, recoverable damage, and observation models. All outputs and
+  defaults are synthetic and illustrative, not experimental estimates.
+keywords:
+  - organoids
+  - hook effect
+  - receptor trafficking
+  - assay interpretation
+  - mathematical modeling

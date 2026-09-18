@@ -1,0 +1,254 @@
+{
+  "ablation": {
+    "True": {
+      "doses_nm": [
+        0.01,
+        0.026101572156825372,
+        0.06812920690579614,
+        0.1778279410038923,
+        0.464158883361278,
+        1.2115276586285888,
+        3.1622776601683795,
+        8.25404185268019,
+        21.544346900318843,
+        56.23413251903491,
+        146.77992676220705,
+        383.1186849557293,
+        1000.0
+      ],
+      "response": [
+        0.005835587976572709,
+        0.07047344615349209,
+        0.3722054517542818,
+        0.6530613051376573,
+        0.8057223541404712,
+        0.9084215504216272,
+        0.947957134917321,
+        0.9601977680290694,
+        0.9133524395051126,
+        0.6346981496125117,
+        0.14867000304046687,
+        0.013332001091648917,
+        0.0008734263051958166
+      ],
+      "metrics": {
+        "peak_dose_nm": 8.25404185268019,
+        "peak": 0.9601977680290694,
+        "top_dose_response": 0.0008734263051958166,
+        "hook_depth": 0.9990903683238208,
+        "interior_peak": true,
+        "hook_flag": true,
+        "status": "descriptive hook"
+      }
+    },
+    "False": {
+      "doses_nm": [
+        0.01,
+        0.026101572156825372,
+        0.06812920690579614,
+        0.1778279410038923,
+        0.464158883361278,
+        1.2115276586285888,
+        3.1622776601683795,
+        8.25404185268019,
+        21.544346900318843,
+        56.23413251903491,
+        146.77992676220705,
+        383.1186849557293,
+        1000.0
+      ],
+      "response": [
+        0.006419173081993617,
+        0.07554983039961839,
+        0.37967730977472647,
+        0.6635266711955058,
+        0.8328909915998225,
+        0.9264826860212528,
+        0.9614063566902347,
+        0.9717784320122403,
+        0.9632720578408313,
+        0.9318214814529008,
+        0.8802598585811278,
+        0.8425551694549513,
+        0.8250446082620019
+      ],
+      "metrics": {
+        "peak_dose_nm": 8.25404185268019,
+        "peak": 0.9717784320122403,
+        "top_dose_response": 0.8250446082620019,
+        "hook_depth": 0.1509951434571355,
+        "interior_peak": true,
+        "hook_flag": true,
+        "status": "descriptive hook"
+      }
+    }
+  },
+  "mesh": [
+    {
+      "shells": 3,
+      "case": "reference",
+      "fluorescence": 0.9851127949441975,
+      "committed": 0.993607459243476
+    },
+    {
+      "shells": 3,
+      "case": "transport",
+      "fluorescence": 0.2908246433655442,
+      "committed": 0.35844795451499745
+    },
+    {
+      "shells": 6,
+      "case": "reference",
+      "fluorescence": 0.9854441270619155,
+      "committed": 0.993766385853951
+    },
+    {
+      "shells": 6,
+      "case": "transport",
+      "fluorescence": 0.3891097267635371,
+      "committed": 0.39138525597133633
+    },
+    {
+      "shells": 12,
+      "case": "reference",
+      "fluorescence": 0.9855033411901137,
+      "committed": 0.9938021825619203
+    },
+    {
+      "shells": 12,
+      "case": "transport",
+      "fluorescence": 0.2603684889927388,
+      "committed": 0.26093393615646243
+    }
+  ],
+  "delay": [
+    {
+      "order": "primary_first",
+      "delay_h": 0,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9740948481239241,
+      "committed": 0.9881550942087279
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 0,
+      "clock": "second_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9740948481239241,
+      "committed": 0.9881550942087279
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 2,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9618419847822707,
+      "committed": 0.9823813503264742
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 2,
+      "clock": "second_addition",
+      "endpoint_h": 74,
+      "fluorescence": 0.9681602585206949,
+      "committed": 0.9853912630876207
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 6,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9364781000441641,
+      "committed": 0.9696342709472383
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 6,
+      "clock": "second_addition",
+      "endpoint_h": 78,
+      "fluorescence": 0.962729517465113,
+      "committed": 0.9826157815258959
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 24,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.6684627356379917,
+      "committed": 0.8066131312848853
+    },
+    {
+      "order": "primary_first",
+      "delay_h": 24,
+      "clock": "second_addition",
+      "endpoint_h": 96,
+      "fluorescence": 0.9526008998412334,
+      "committed": 0.9773396905008689
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 0,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9740948481239241,
+      "committed": 0.9881550942087279
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 0,
+      "clock": "second_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9740948481239241,
+      "committed": 0.9881550942087279
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 2,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9694415297721135,
+      "committed": 0.9859628327128918
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 2,
+      "clock": "second_addition",
+      "endpoint_h": 74,
+      "fluorescence": 0.9745545023957047,
+      "committed": 0.9883720661930443
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 6,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.9560448701382238,
+      "committed": 0.9795484546304148
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 6,
+      "clock": "second_addition",
+      "endpoint_h": 78,
+      "fluorescence": 0.9745545302816264,
+      "committed": 0.9883720821747456
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 24,
+      "clock": "first_addition",
+      "endpoint_h": 72,
+      "fluorescence": 0.7918727555323747,
+      "committed": 0.8907164944937965
+    },
+    {
+      "order": "secondary_first",
+      "delay_h": 24,
+      "clock": "second_addition",
+      "endpoint_h": 96,
+      "fluorescence": 0.974554545136343,
+      "committed": 0.9883720864629597
+    }
+  ]
+}

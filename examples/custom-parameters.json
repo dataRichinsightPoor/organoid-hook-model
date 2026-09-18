@@ -1,0 +1,12 @@
+{
+  "copies_per_cell": 100000,
+  "radius_um": 200,
+  "diffusion_um2_s": 1,
+  "core_copy_ratio": 0.3,
+  "kint_primary": 0.2,
+  "kint_ternary": 0.1,
+  "krecycle": 0.3,
+  "receptor_half_life_h": 36,
+  "protein_recovery_half_life_h": 8,
+  "reporter_loss_h": 0
+}
