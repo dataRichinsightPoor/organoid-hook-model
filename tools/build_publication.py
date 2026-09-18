@@ -43,6 +43,7 @@ text = text.replace("../figures/", "figures/")
 (OUT / "the-hook-is-a-property-of-the-system.md").write_text(text)
 (OUT / "figures").mkdir(exist_ok=True)
 for filename in ("cover-hook-system.png", "cover-hook-system-linkedin.png",
-                 "mechanism-map.png", "readout-separation.png"):
+                 "mechanism-map.png", "readout-separation.png",
+                 "cell-scenarios.png", "cell-trafficking.png", "cell-addition-orders.png"):
     shutil.copyfile(ROOT / "figures" / filename, OUT / "figures" / filename)
-print("Built publication manuscript and copied the four existing figures.")
+print("Built publication manuscript and copied two covers and five scientific figures.")

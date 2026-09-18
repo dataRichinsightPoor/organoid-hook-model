@@ -117,6 +117,27 @@
     <noscript><p>Enable JavaScript to switch snapshots, or <a href="worked-example.html">read the static worked example</a> and download the trajectory CSV.</p></noscript>
   </section>
   <section class="notes"><h3>What this model does not establish</h3><p>These simulations do not identify a mechanism in a real assay. Effective 1:1:1 binding omits multivalent cross-linking; the three-shell geometry is deliberately coarse. Receptors persist on a fixed initial-cell scaffold after death commitment. Neither commercial kit calibration nor empirical fluorescence loss is assumed.</p><p>Reporter loss is <strong>off by default</strong>. The mechanism lab exposes it only as a stress test. “Protein recovery” is a generic downstream repair timescale, distinct from endosomal receptor degradation and surface internalization.</p><p>All delayed-addition comparisons here use the same clock from first addition. They therefore also differ in combined-reagent exposure duration. Precomplexing represents the equilibrium limit in the bath, not a particular incubation protocol.</p></section>
+  <section id="cellular-scenarios" class="trace-section schematic-gallery" aria-labelledby="schematic-title">
+    <div class="section-label">CELLULAR SCHEMATICS</div>
+    <h2 id="schematic-title">Locate the changed step</h2>
+    <p>These fixed diagrams explain the scenario families; they do not respond to the explorer controls. They depict model assumptions, not measured molecular inventories or calibrated biology.</p>
+    <details class="data-details"><summary>Seven mechanism-lab scenarios</summary>
+      <p>Compare productive processing, damage recovery, reporter persistence, tissue access, and core receptor abundance. T is surface ternary complex, W is internalized complex, P is productive payload, and Q is reversible damage. Recovery removes Q; it does not export payload. Tissue circles denote cells and cyan marks denote targets, with illustrative counts. Core cells are retained in the target-poor scenario.</p>
+      <a href="figures/cell-scenarios.png" target="_blank" rel="noopener">Open full-resolution figure</a>
+      <img src="figures/cell-scenarios.png" loading="lazy" width="2000" height="2780" alt="Seven mechanism-lab schematics locate reference behavior, poor productive release, fast and slow recovery, reporter loss, target-poor core, and large-organoid slow transport.">
+    </details>
+    <details class="data-details"><summary>Three receptor-trafficking presets</summary>
+      <p>Each preset changes several trafficking rates together. The drawings follow the ternary complex; analogous terms apply to free and primary-bound receptor. Receptor copy number and retained-endosomal degradation half-time are varied independently in the atlas. Synthesis and other unchanged terms are omitted from these simplified views.</p>
+      <a href="figures/cell-trafficking.png" target="_blank" rel="noopener">Open full-resolution figure</a>
+      <img src="figures/cell-trafficking.png" loading="lazy" width="2000" height="1860" alt="Cellular internalization, recycling, and processing routes for slow internalization, rapid recycling, and endosomal retention, with each preset's rate constants.">
+    </details>
+    <details class="data-details"><summary>Four addition orders under accumulation</summary>
+      <p>A is primary antibody; S is secondary–toxin conjugate; C is soluble A–S complex; R is free receptor; B is receptor–primary complex; T is receptor–primary–secondary complex. Delays are six hours in the browser dataset. All binding routes remain active after both reagents become available. Precomplexing is an equilibrium mixture, not complete binding or a specified incubation duration.</p>
+      <a href="figures/cell-addition-orders.png" target="_blank" rel="noopener">Open full-resolution figure</a>
+      <img src="figures/cell-addition-orders.png" loading="lazy" width="2000" height="2210" alt="Cellular starting states and timelines for simultaneous addition, primary first, secondary first, and precomplexed reagent mixtures, with retained reagents and distinct joint-exposure start times.">
+    </details>
+    <p class="small muted">All arrows are qualitative and drawings are not to scale. Reporter loss is a hypothesis, off by default; the large-organoid transport stress case is not spatially converged. The <a href="article.html">article</a> provides complete figure captions and interpretation boundaries.</p>
+  </section>
   <footer><a href="article.html">Read the companion article</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/docs/provenance.md">Public-source audit</a><a href="https://github.com/dataRichinsightPoor/organoid-hook-model/blob/main/CITATION.cff">Cite this software</a><span>MIT · Ermelinda Damko · 2026</span></footer>
 </main>
 </div>

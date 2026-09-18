@@ -10,7 +10,7 @@ Use `the-hook-is-a-property-of-the-system.md` as the editorial copy. It contains
 
 Insert the corresponding files from `equations/light/` at those positions. The white-background images are intended for a light article body; equivalent files in `equations/dark/` are supplied for a dark composition. Each image is captured at three-times browser pixel density from the public article's actual mathematical typesetting. Image descriptions are included in the manuscript.
 
-The cover and the two numbered scientific figures are in `figures/`. Keep the figure captions and the synthetic, uncalibrated labels: they identify what the evidence is. The wide cover is 1920 × 1080; the alternate cover is 1200 × 675.
+The two cover sizes and five numbered scientific figures are in `figures/`. Figures 1, 2, and 4 are dark cellular schematics covering the three trafficking presets, all seven mechanism-lab cases, and all four addition orders. Figures 3 and 5 are quantitative simulation plots. The schematics explain assumptions and pathways, not molecular anatomy or measured inventories. Keep their captions and the synthetic, uncalibrated labels: they identify what the evidence is. The wide cover is 1920 × 1080; the alternate cover is 1200 × 675. Use full-width placement for the scientific figures and inspect them at the intended reading size.
 
 In the plain-character manuscript, kdeg, kP, kperm, and kloss correspond to the subscripted rate constants in the equation images. Ceq and Teq denote the equilibrium complexes, Wc denotes the per-initial-cell endosomal inventory, and KA and KS denote the two dissociation constants. No parameter or equation has changed.
 
@@ -28,4 +28,4 @@ Before posting, inspect image sizing, source links, and symbol rendering in each
 
 ## Reproduction
 
-Run `python tools/build_reading_pages.py` and `python tools/build_publication.py` from the repository root. With Node.js, Playwright, and its Chromium browser installed, run `node tools/export_equation_images.mjs` to recapture the equations from the public article. The module also accepts a local article URL through its exported `exportEquationImages` function.
+Run `python tools/build_cell_schematics.py`, `python tools/build_reading_pages.py`, and `python tools/build_publication.py` from the repository root. With Node.js, Playwright, and its Chromium browser installed, run `node tools/export_equation_images.mjs` to recapture the equations from the public article. The module also accepts a local article URL through its exported `exportEquationImages` function.
