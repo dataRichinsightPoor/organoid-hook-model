@@ -102,7 +102,7 @@ $("curve").addEventListener("mousemove",e=>{if(!chartGeometry)return;const g=cha
 $("curve").addEventListener("mouseleave",()=>{$("tooltip").hidden=true});
 function showError(e){$("error").hidden=false;$("error").textContent="The evidence files could not be loaded or rendered. Please reload, or open the repository to download the data. Details: "+e.message;console.error(e)}
 window.addEventListener("resize",()=>{if(atlas)render()});
-if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches){document.documentElement.dataset.theme="light";$("theme").textContent="Dark mode";}
+// Dark is the publication default, independent of the operating-system theme.
 Promise.all(["atlas.json","lab.json"].map(url=>fetch(url).then(r=>{if(!r.ok)throw new Error(`${url}: HTTP ${r.status}`);return r.json()}))).then(([a,l])=>{
  atlas=a;lab=l;
  $("case").innerHTML=Object.entries(l.cases).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join("");

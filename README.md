@@ -8,6 +8,10 @@ A no-install, no-wash secondary-conjugate assay explorer for Data-Rich, Insight-
 
 [Run and modify the actual model in Colab](https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb). The notebook downloads the version-pinned public release, runs the tests, and lets you change continuous parameters without a local Python installation; it executes in a third-party notebook runtime.
 
+[Follow one simulation](https://datarichinsightpoor.github.io/organoid-hook-model/#follow-one-simulation): step through six computed time points from receptor copies to fluorescence, compare three dose conditions, and inspect the substituted equations in the [complete worked example](https://datarichinsightpoor.github.io/organoid-hook-model/worked-example.html). This fixed Reference example is independent of the atlas controls and uses the unchanged v0.1.0 model. Its downloadable script, parameters, shell states, and aggregate trajectories are included.
+
+The explorer and reading pages open in dark mode, with a manual light-mode option. The expanded article includes eleven peer-reviewed references and a separately identified technical protocol. Its [publication cover](figures/cover-hook-system.png) uses actual viewer captures; `tools/build_cover.py` reproduces the composition from committed screenshots.
+
 ## What you can explore
 
 - **Receptor atlas:** 4,212 simulations across 10,000 / 100,000 / 1,000,000 initial surface copies per cell, three trafficking archetypes, three endosomal receptor degradation half-times, four orders of addition, and two-dimensional primary / secondary concentration combinations.
@@ -28,6 +32,7 @@ organoid-hook --primary 30 --secondary 3 --order primary_first --delay 6 --hours
 organoid-hook --parameters examples/custom-parameters.json --primary 30 --secondary 3 --output custom.csv
 python tools/build_atlas.py
 python tools/build_mechanism_lab.py
+python tools/build_trace.py
 python tools/build_reading_pages.py
 python tools/verify_atlas.py
 ```
@@ -58,7 +63,7 @@ The model explicitly includes a primary-bound soluble complex that can still bin
 
 The receptor module runs on a fixed initial-cell scaffold, even after modeled death commitment. This preserves explicit ligand bookkeeping but can overestimate late delivery. Three radial shells are an exploratory approximation, not a spatially converged organoid reconstruction. See the [resolution checks and structural limitations](docs/model.md).
 
-No confidential measurements, internal protocols, named targets, or proprietary reagent parameters are included. Public literature is used for mechanisms, not to disguise guessed numbers as fitted values. The source screen is bounded to retrieved publication records and disclosures; it is not a legal clearance or a guarantee about all past and present affiliations.
+No confidential measurements, internal protocols, nonpublic target identities, or proprietary reagent parameters are included. Public literature is used for mechanisms, not to disguise guessed numbers as fitted values. The source screen is bounded to retrieved publication records and disclosures; it is not a legal clearance or a guarantee about all past and present affiliations.
 
 ## Project map
 

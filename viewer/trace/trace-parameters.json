@@ -1,0 +1,126 @@
+{
+  "synthetic": true,
+  "calibrated": false,
+  "model_version": "0.1.0",
+  "model_url": "https://github.com/dataRichinsightPoor/organoid-hook-model/tree/v0.1.0",
+  "parameters": {
+    "shells": 3,
+    "radius_um": 150,
+    "organoids": 20,
+    "bath_ul": 100,
+    "extracellular_fraction": 0.2,
+    "cells_per_tissue_um3": 0.0005,
+    "copies_per_cell": 100000.0,
+    "core_copy_ratio": 1.0,
+    "diffusion_um2_s": 3.0,
+    "complex_diffusion_ratio": 0.65,
+    "kon_a": 0.36,
+    "kd_a_nm": 1.0,
+    "kon_s": 0.36,
+    "kd_s_nm": 0.3,
+    "solution_binding": true,
+    "kint_free": 0.04,
+    "kint_primary": 0.12,
+    "kint_ternary": 0.12,
+    "krecycle": 0.06,
+    "receptor_half_life_h": 12,
+    "payload_yield": 1.0,
+    "release_efficiency": 0.2,
+    "payload_half_life_h": 12,
+    "payload_p50": 1000,
+    "damage_rate_h": 0.15,
+    "protein_recovery_half_life_h": 24,
+    "death_rate_h": 0.12,
+    "damage_half": 0.45,
+    "hill": 3,
+    "membrane_delay_h": 6,
+    "reporter_loss_h": 0.0,
+    "ldh_loss_h": 0.03,
+    "optical_core_weight": 0.7,
+    "fluorescence_saturation": 0.0,
+    "atp_suppression": 0.35
+  },
+  "cases": [
+    [
+      "sampled_peak",
+      8.25404185268019,
+      3.0
+    ],
+    [
+      "primary_excess",
+      1000.0,
+      3.0
+    ],
+    [
+      "more_secondary",
+      1000.0,
+      100.0
+    ]
+  ],
+  "times_h": [
+    0.0,
+    6.0,
+    12.0,
+    24.0,
+    48.0,
+    72.0
+  ],
+  "geometry": {
+    "cells": [
+      5235.987755982988,
+      36651.91429188092,
+      99483.76736367679
+    ],
+    "total_cells": 141371.6694115407,
+    "extracellular_l": [
+      2.094395102393196e-09,
+      1.466076571675237e-08,
+      3.9793506945470716e-08
+    ],
+    "beta_nm_per_copy": [
+      0.004151347667934616,
+      0.004151347667934616,
+      0.004151347667934616
+    ],
+    "initial_surface_receptor_nm": [
+      415.1347667934616,
+      415.1347667934616,
+      415.1347667934616
+    ],
+    "cell_weights": [
+      0.037037037037037035,
+      0.25925925925925924,
+      0.7037037037037037
+    ],
+    "optical_weights": [
+      0.7,
+      0.85,
+      1.0
+    ],
+    "surface_receptor_inventory_well_equivalent_nm": 0.23462050527941114
+  },
+  "derived": {
+    "kdeg_per_h": 0.057762265046662105,
+    "payload_loss_per_h": 0.057762265046662105,
+    "repair_per_h": 0.028881132523331052,
+    "initial_endosomal_copies_per_cell": 33966.7379734505,
+    "synthesis_copies_per_cell_per_h": 1961.9957215929703
+  },
+  "checks": [
+    {
+      "case": "sampled_peak",
+      "primary_relative_inventory_drift": 6.661338147750939e-16,
+      "secondary_relative_inventory_drift": 2.6645352591003757e-15
+    },
+    {
+      "case": "primary_excess",
+      "primary_relative_inventory_drift": 2.4424906541753444e-15,
+      "secondary_relative_inventory_drift": 1.1102230246251565e-15
+    },
+    {
+      "case": "more_secondary",
+      "primary_relative_inventory_drift": 1.3322676295501878e-15,
+      "secondary_relative_inventory_drift": 1.2212453270876722e-15
+    }
+  ]
+}

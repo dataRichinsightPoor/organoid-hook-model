@@ -37,3 +37,11 @@ A two-dimensional reagent matrix should be interpreted with target-negative, pri
 Separate the effect of order from the effect of total exposure time. Compare both a common time from first addition and a common time after the second reagent becomes available; retain raw, background-corrected, and normalized readouts so normalization cannot hide a change in the controls.
 
 Optical or reporter explanations require independent reporter-stability, dynamic-range, accessibility, and cell-state checks. A modeled reporter-loss counterexample is a reason to measure persistence, not evidence that persistence failed.
+
+## Primary evidence relevant to extensions
+
+[Lewis and colleagues](https://pmc.ncbi.nlm.nih.gov/articles/PMC11164375/) directly compared CellTox Green, LDH, MTS, and ATP readouts in intestinal organoid-derived cultures and found assay- and line-dependent outcomes. Those data support validating each observation process, not importing assay correction factors into tumor organoids.
+
+[Forcina and colleagues](https://pmc.ncbi.nlm.nih.gov/articles/PMC5509363/) separated death onset and population death rate using time-lapse live/dead imaging; they also accounted for occasional declines in SYTOX Green-positive object counts attributed most likely to marker loss from long-dead cells. This is a precedent for checking reporter persistence, not evidence of CellTox Green decay or a source of a loss-rate parameter.
+
+[Hafner and colleagues](https://pmc.ncbi.nlm.nih.gov/articles/PMC4887336/) showed how division number confounds conventional endpoint sensitivity metrics and introduced growth-rate inhibition metrics. Implementing such an extension requires proliferation and initial/live population measurements; the current no-growth simulator cannot simply rename its ATP proxy as a GR score.

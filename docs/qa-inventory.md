@@ -27,3 +27,17 @@ All 34 automated tests passed. All atlas and mechanism-lab rows passed structure
 Playwright checks exercised both explorer modes, all seven mechanism cases, all addition orders, receptor and trafficking selectors, observation times, alternate readouts, dose inspection, exact-value tables, theme switching, reset, and CSV/JSON/PNG downloads. No JavaScript errors were observed. The CSV contained the expected 117 data rows, and parameter JSON preserved the selected scenario. Desktop and mobile explorer layouts were inspected. The mathematical page rendered 198 MathJax containers with no MathJax errors and no horizontal page overflow at 390 px after the inline-equation layout correction. Both article figures loaded.
 
 The notebook's code cells were syntax-checked, but an authenticated hosted Colab session was not executed. Its scientific implementation is the same tested Python package. Hosted runtime availability and third-party dependencies remain external requirements. Remote CI and Pages status can be inspected in the repository; local checks alone do not establish their success.
+
+## Worked-example addition: QA scope
+
+Check the “Follow one simulation” navigation and direct hash link; all three dose conditions at all six time points; the initial-state zero response; the 72 h endpoint comparison; payload delivery/loss arithmetic; independence from atlas controls; all four downloads; the static worked-equation page; light/dark themes; and desktop/mobile overflow. Off-happy-path checks must cover a missing or invalid trace data file and JavaScript-disabled access to the static walkthrough. Recompute all three trajectories from Python in the automated tests and compare matching endpoints against the already published mechanism lab. This addition changes the viewer and documentation, not the v0.1.0 numerical model.
+
+The requested publication theme is dark by default on the explorer, equations, article, and worked example, even when the operating system prefers light mode. The manual light/dark controls remain available. The cover must use actual viewer captures, retain visible synthetic/uncalibrated labeling, match the dark series presentation, and avoid implying that the computations are experimental data.
+
+## Worked-example and literature update verification, September 18, 2026
+
+All 39 tests passed, including recomputation of all three worked trajectories, download consistency, payload bookkeeping, and matching endpoints against the original mechanism lab. The separate atlas verifier passed all structure/finite-value checks and independently recomputed nine atlas and three mechanism-lab conditions.
+
+Playwright exercised all 18 worked-example snapshots, all four downloadable files, control independence, the seven-row endpoint comparison, dark default under a light operating-system preference, manual theme switching, and 375 px mobile layout. Missing data, invalid data schema, and JavaScript-disabled access were tested. The equations, article, and static worked example opened in dark mode without mobile page overflow or MathJax errors. No JavaScript errors were observed.
+
+The expanded article rendered all eleven bibliography entries and all three images. Desktop and mobile article/reference screenshots were visually inspected. The two cover images use actual reference-viewer captures and explicitly identify the results as synthetic and uncalibrated; the composition script and source captures are committed. The numerical model and v0.1.0 release tag remain unchanged.
