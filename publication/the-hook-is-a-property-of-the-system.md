@@ -2,7 +2,7 @@
 
 Data-Rich, Insight-Poor — CCXXIV
 
-![Organoid Hook Model: dose-response curves and receptor-to-fluorescence trajectories in the public explorer.](figures/cover-hook-system.png)
+![Organoid Hook Model: dose-response curves and receptor-to-fluorescence trajectories in the public explorer.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cover-hook-system.png)
 
 Accumulation-format reference simulations at 72 hours. The curves and molecular inventories are model outputs, not experimental measurements.
 
@@ -26,17 +26,17 @@ A closer cytotoxicity precedent comes from Quadros and colleagues, who paired an
 
 The simplest useful model allows primary antibody to bind receptor and secondary independently. It also allows a soluble primary–secondary complex to bind receptor. Excluding that last route would remove a productive path to surface assembly and could overstate sequestration; reversible complex dissociation would still return free reagents. Here, soluble complex can contribute directly to surface assembly. The hook emerges because finite secondary is distributed over an increasing primary population, while primary without secondary competes for the same receptors.
 
-![Three cell-surface panels show balanced assembly, excess primary at unchanged secondary, and increased secondary at the same high primary. Secondary-loaded receptor complexes decline despite high occupancy, then increase when secondary supply is raised.](figures/cell-hook-assembly.png)
+![Three cell-surface panels show balanced assembly, excess primary at unchanged secondary, and increased secondary at the same high primary. Secondary-loaded receptor complexes decline despite high occupancy, then increase when secondary supply is raised.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-hook-assembly.png)
 
 Figure 1. The assembly hook separates receptor occupancy from secondary loading. In the left panel, a substantial fraction of receptor-bound primary carries secondary conjugate. “Balanced” describes this illustrative assembly regime, not an equimolar mixture or an experimentally established optimum. In the middle panel, excess primary competes for receptors while finite secondary is distributed across a larger primary pool. In the right panel, increasing secondary at the same high primary can increase surface ternary complex. Soluble primary–secondary complex remains receptor competent in every panel, and either assembly route can contribute to T. Receptor icon number is held constant; molecular counts and arrow weights are qualitative, not the occupancies of the worked simulation. The panels depict separate conditions rather than a sequential-addition experiment. Improved loading does not establish restored cumulative payload delivery or guarantee a rescued fluorescence response. [Open the full-resolution schematic](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-hook-assembly.png).
 
 The equilibrium limit makes that competition explicit. In a uniform compartment with effective 1:1:1 binding and negligible depletion of soluble ligands by receptor, the soluble primary–secondary complex, Ceq, determines the surface ternary complex, Teq:
 
-![Soluble antibody complex and receptor-bound ternary complex at equilibrium.](equations/light/01-assembly.png)
+![Soluble antibody complex and receptor-bound ternary complex at equilibrium.](https://datarichinsightpoor.github.io/organoid-hook-model/equation-images/light/01-assembly.png)
 
 Here A₀ and S₀ are total primary and secondary concentrations, R₀ is total surface receptor concentration, and KA and KS are the primary–receptor and primary–secondary dissociation constants; Σ = A₀ + S₀ + KS abbreviates their sum in the soluble binding balance. All of these variables, constants, and complex concentrations use the same concentration units. The first relationship accounts for finite secondary supply; the second accounts for competition at the receptor. At large primary excess, Ceq approaches S₀, while the competing primary concentration continues to rise. The limiting behavior is therefore particularly simple:
 
-![At large primary excess, ternary complex declines in inverse proportion to primary concentration.](equations/light/02-high-dose-limit.png)
+![At large primary excess, ternary complex declines in inverse proportion to primary concentration.](https://datarichinsightpoor.github.io/organoid-hook-model/equation-images/light/02-high-dose-limit.png)
 
 Surface delivery-competent complex declines approximately in inverse proportion to primary concentration even as receptor occupancy approaches saturation. Saturating the target and supplying it with secondary conjugate have become progressively less equivalent.
 
@@ -44,7 +44,7 @@ This is an assembly hook without an imposed bell-shaped response function. Its m
 
 The opposite limit provides a useful test of the explanation. Suppose secondary is sufficiently abundant to load nearly all primary, and remains so after primary is increased tenfold. Under the same independent-binding, receptor-dilute equilibrium assumptions, the leading-order relationships become
 
-![With sufficient secondary excess, nearly all primary is loaded and the surface ternary fraction approaches receptor saturation.](equations/light/05-secondary-excess.png)
+![With sufficient secondary excess, nearly all primary is loaded and the surface ternary fraction approaches receptor saturation.](https://datarichinsightpoor.github.io/organoid-hook-model/equation-images/light/05-secondary-excess.png)
 
 In this approximation, increasing primary raises surface ternary assembly toward a receptor-limited plateau. With secondary fixed at 1,000 nM, primary increased from 1 to 10 nM, and dissociation constants of 1 nM for primary–receptor binding and 0.3 nM for primary–secondary binding, the receptor-dilute expression gives secondary-loaded surface fractions of approximately 0.50 and 0.91. A tenfold increase in primary therefore produces about 1.8-fold more surface ternary complex in this idealized equilibrium calculation, not tenfold more. Neither fraction measures payload delivery or killing. Receptor copies alone cannot establish the dilute limit: the cell number and accessible volume determine whether binding appreciably depletes the available primary.
 
@@ -68,7 +68,7 @@ Processing is not synonymous with productive access. In a protein-immunotoxin st
 
 Within each model shell, the current productive payload inventory follows
 
-![Current productive payload changes by delivery minus first-order loss.](equations/light/03-payload-balance.png)
+![Current productive payload changes by delivery minus first-order loss.](https://datarichinsightpoor.github.io/organoid-hook-model/equation-images/light/03-payload-balance.png)
 
 Wc is the endosomal ternary-complex inventory in copies per initial cell, kdeg is its processing rate, d is the effective payload yield per secondary conjugate, and η is the fraction becoming productive intracellular payload. P is the current productive inventory in equivalents per initial cell, t is time in hours, and kP is its first-order loss rate; both rate constants have units of inverse hours. The source term, η d kdeg Wc, is the delivery flux. Integrating that term gives cumulative delivery, whereas the inventory P also subtracts what has been lost. The implementation ties endosomal receptor degradation and complex processing to the same rate, with unresolved productive access represented by η. This is a bookkeeping assumption, not a biological rule that faster receptor degradation necessarily improves toxin delivery. A system in which processing competes with toxin destruction would require those routes to be separated.
 
@@ -76,17 +76,17 @@ At 24 hours in the reference simulation, the population-weighted delivery flux i
 
 The meaning of turnover also depends on which pool is turning over. The receptor parameter exposed in the atlas is the degradation half-time of retained endosomal receptor in the absence of recycling, rather than the measured half-life of the whole cellular receptor pool. Maintaining the same starting surface abundance while changing that rate requires a different synthesis flux. Comparisons described simply as “equal receptor expression” can therefore impose unequal replacement capacity within the model.
 
-![Three cellular trafficking schematics show slow internalization, rapid recycling, and endosomal retention, with the separate internalization rates for free, primary-bound, and ternary-bound receptor and the recycling rate for each preset.](figures/cell-trafficking.png)
+![Three cellular trafficking schematics show slow internalization, rapid recycling, and endosomal retention, with the separate internalization rates for free, primary-bound, and ternary-bound receptor and the recycling rate for each preset.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-trafficking.png)
 
 Figure 2. The receptor atlas compares three joint trafficking presets, not three isolated changes in one rate. The cellular sketches follow the internalized ternary complex; analogous internalization and recycling terms apply to free and primary-bound receptor. Initial surface copies and the conditional degradation half-time of retained endosomal receptor are independent atlas axes. Arrow weights are qualitative, and the simplified drawings omit synthesis and other unchanged terms. [Open the full-resolution schematic](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-trafficking.png).
 
 Downstream recovery is represented separately as a generic reversible damage or protein-deficit state. In the reference case, sufficient damage persists to produce near-complete killing across a broad dose range. Shortening its recovery half-time from 24 to 2 hours leaves a substantial hook even at 100 nM secondary: the highest-primary fluorescence is approximately 0.226 against a sampled maximum of 0.710. Faster recovery does not create the upstream assembly deficit; it prevents that deficit from being hidden by accumulated killing. Conversely, when productive release is too poor to generate appreciable damage at any dose, a flat low curve provides no evidence that the assay has been rescued.
 
-![Cell-level and organoid cross-section schematics locate all seven mechanism-lab scenarios: reference, poor productive release, fast and slow recovery, reporter loss, target-poor core, and large-organoid slow transport.](figures/cell-scenarios.png)
+![Cell-level and organoid cross-section schematics locate all seven mechanism-lab scenarios: reference, poor productive release, fast and slow recovery, reporter loss, target-poor core, and large-organoid slow transport.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-scenarios.png)
 
 Figure 3. Each mechanism-lab scenario changes a specified part of the model relative to the reference case. T and W denote surface and internalized ternary complex; P is productive payload and Q is the generic reversible damage or protein-deficit state. The processing arrow combines several unresolved biological steps and assigns no toxin-specific route or intracellular target. Recovery is removal of Q, not export of payload from the cell. In the tissue sections, circles represent cells and cyan marks represent surface targets; their counts are illustrative, not proportional to receptor abundance, and core cells are retained in the target-poor case. Reporter loss moves already permeabilized material from an observable to an unobserved state, without restoring survival. All panels are conceptual, not calibrated predictions. [Open the full-resolution schematic](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-scenarios.png).
 
-![Six simulated mechanism comparisons across secondary concentration, transport, productive release, recovery, and reporter persistence.](figures/mechanism-map.png)
+![Six simulated mechanism comparisons across secondary concentration, transport, productive release, recovery, and reporter persistence.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/mechanism-map.png)
 
 Figure 4. Accumulation-format simulations at 72 hours. The transport stress case is not spatially converged and is included to expose sensitivity to tissue geometry, not to predict penetration quantitatively.
 
@@ -100,7 +100,7 @@ The simulator couples a finite bath to concentric tissue shells and allows free 
 
 Order of addition introduces a related ambiguity in time. A delayed-secondary condition read 72 hours after the first addition has less joint exposure than a simultaneous condition read at the same clock time. The repository compares both endpoints anchored to the first addition and endpoints aligned to the availability of both reagents. Much of the apparent secondary-first delay effect in the reference simulation diminishes under the latter comparison. A claim about addition order should survive separating the order itself from the duration during which productive assembly was possible.
 
-![Four cellular starting-state schematics and timelines compare simultaneous addition, primary first, secondary first, and an equilibrium precomplexed mixture under accumulation exposure.](figures/cell-addition-orders.png)
+![Four cellular starting-state schematics and timelines compare simultaneous addition, primary first, secondary first, and an equilibrium precomplexed mixture under accumulation exposure.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-addition-orders.png)
 
 Figure 5. Addition order specifies initial availability, not an irreversible assembly route. A is primary antibody, S is secondary–toxin conjugate, C is soluble A–S complex, R is free receptor, B is receptor–primary complex, and T is receptor–primary–secondary complex. Once both reagents are present, all four reversible binding routes remain available. Delayed addition is six hours in the committed browser atlas; the Python implementation permits other delays. Precomplexing initializes an equilibrium bath mixture containing free species and complex, not complete complexation or a specified premixing duration. Reagents are retained throughout, while their free concentrations evolve. [Open the full-resolution schematic](https://datarichinsightpoor.github.io/organoid-hook-model/figures/cell-addition-orders.png).
 
@@ -114,7 +114,7 @@ Lewis and colleagues made this issue concrete by comparing CellTox Green, LDH, M
 
 Repeated measurements also separate events that an endpoint combines. Forcina and colleagues used STACK to resolve the onset and subsequent rate of population cell death, finding substantially different kinetics among compounds with similar overall lethality ([Forcina et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC5509363/)). In the present model, cells accumulate damage, become committed to death, and then become membrane-permeable after a delay. The connection to fluorescence becomes clearer when written as an integral over that history. With no initial reporter-accessible material and a linear observation process, the normalized signal is
 
-![Normalized fluorescence is an optically weighted integral of permeabilization history and reporter persistence.](equations/light/04-fluorescence-history.png)
+![Normalized fluorescence is an optically weighted integral of permeabilization history and reporter persistence.](https://datarichinsightpoor.github.io/organoid-hook-model/equation-images/light/04-fluorescence-history.png)
 
 The index j identifies a tissue shell, and u is the earlier time at which cells became permeable. The entry rate rⱼ(u), measured as a fraction of that shell's initial cells per hour, equals kperm Eⱼ(u): Eⱼ is the fraction committed to death but not yet permeable, and kperm is the first-order permeabilization rate in inverse hours. The normalized optical weight ωⱼ = wⱼoⱼ / Σℓ wℓoℓ combines the shell's initial-cell fraction wⱼ with its relative optical contribution oⱼ; ℓ runs over the same shells. Finally, kloss is the first-order loss rate of reportable material. Thus F is dimensionless and referenced to complete, persistent permeabilization of the initial population, rather than calibrated fluorescence units.
 
@@ -124,7 +124,7 @@ Reporter loss illustrates a mathematical possibility, not an established explana
 
 There is a relevant precedent, with an important boundary. Forcina and colleagues observed occasional declines in SYTOX Green-positive object counts, attributed most likely to marker loss from long-dead cells, and incorporated a correction into their lethal-fraction analysis ([Forcina et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC5509363/)). This involved a different dye and counted objects rather than whole-well fluorescence. It motivates measuring persistence in the assay of interest, but supplies neither evidence of CellTox Green decay nor a loss constant for this model. Reporter loss remains off by default. Monotonic detector saturation is a separate issue: it can conceal differences or flatten an increasing response, but cannot by itself reverse the direction of a monotonic input.
 
-![The same simulated biological response with persistent or transient reporter accessibility.](figures/readout-separation.png)
+![The same simulated biological response with persistent or transient reporter accessibility.](https://datarichinsightpoor.github.io/organoid-hook-model/figures/readout-separation.png)
 
 Figure 6. Cumulative death commitment, membrane permeabilization, and fluorescence with reporter loss disabled or enabled. The loss scenario changes the observation process without changing the underlying killing trajectory. It is an unvalidated observation-model stress test, not a measured property of CellTox Green; reporter loss is disabled in the reference model.
 

@@ -6,6 +6,7 @@ import shutil
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "publication"
 OUT.mkdir(exist_ok=True)
+PUBLIC = "https://datarichinsightpoor.github.io/organoid-hook-model"
 INLINE = {
     r"C_{\mathrm{eq}}": "Ceq", r"T_{\mathrm{eq}}": "Teq",
     "A_0": "A₀", "S_0": "S₀", "R_0": "R₀", "K_A": "KA", "K_S": "KS",
@@ -40,7 +41,8 @@ def display(match):
 text = re.sub(r"\\\[[\s\S]*?\\\]", display, text)
 text = re.sub(r"\\\(([\s\S]*?)\\\)", lambda m: INLINE[m.group(1)], text)
 assert counter == 5 and r"\(" not in text and r"\[" not in text
-text = text.replace("../figures/", "figures/")
+text = text.replace("../figures/", f"{PUBLIC}/figures/")
+text = text.replace("](equations/light/", f"]({PUBLIC}/equation-images/light/")
 (OUT / "the-hook-is-a-property-of-the-system.md").write_text(text)
 (OUT / "figures").mkdir(exist_ok=True)
 for filename in ("cover-hook-system.png", "cover-hook-system-linkedin.png",
@@ -48,4 +50,9 @@ for filename in ("cover-hook-system.png", "cover-hook-system-linkedin.png",
                  "cell-scenarios.png", "cell-trafficking.png", "cell-addition-orders.png",
                  "cell-hook-assembly.png"):
     shutil.copyfile(ROOT / "figures" / filename, OUT / "figures" / filename)
-print("Built publication manuscript and copied two covers and six scientific figures.")
+for theme in ("light", "dark"):
+    destination = ROOT / "viewer/equation-images" / theme
+    destination.mkdir(parents=True, exist_ok=True)
+    for equation in (OUT / "equations" / theme).glob("*.png"):
+        shutil.copyfile(equation, destination / equation.name)
+print("Built illustrated publication manuscript with public image addresses; copied figures and equation images.")
