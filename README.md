@@ -12,6 +12,8 @@ A no-install, no-wash secondary-conjugate assay explorer for Data-Rich, Insight-
 
 The explorer and reading pages open in dark mode, with a manual light-mode option. The expanded article includes eleven peer-reviewed references and a separately identified technical protocol. Its [publication cover](figures/cover-hook-system.png) uses actual viewer captures; `tools/build_cover.py` reproduces the composition from committed screenshots.
 
+The [LinkedIn and Substack publication kit](publication/README.md) contains the self-contained manuscript, portable inline notation, four typeset equation images in light and dark versions, and the existing cover and scientific figures.
+
 ## What you can explore
 
 - **Receptor atlas:** 4,212 simulations across 10,000 / 100,000 / 1,000,000 initial surface copies per cell, three trafficking archetypes, three endosomal receptor degradation half-times, four orders of addition, and two-dimensional primary / secondary concentration combinations.
