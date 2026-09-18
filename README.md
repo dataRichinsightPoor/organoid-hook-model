@@ -13,6 +13,17 @@ A no-install, accumulation-format secondary-conjugate assay explorer for Data-Ri
 
 The [public-source provenance](docs/provenance.md) and [scientific challenge and literature audit](docs/scientific-challenge.md) document the evidence boundaries and revisions.
 
+## Start here
+
+No coding or GitHub experience is needed to explore the model.
+
+1. **Open the [interactive explorer](https://datarichinsightpoor.github.io/organoid-hook-model/).** Keep the default settings initially and compare the three secondary-concentration curves. The plotted values are synthetic simulations, not experimental measurements.
+2. **[Follow one simulation](https://datarichinsightpoor.github.io/organoid-hook-model/#follow-one-simulation).** Trace receptor copies through surface assembly, productive payload, and fluorescence before changing the larger parameter set.
+3. **Compare what the assay reports with what was delivered.** Return to the explorer and change the vertical-axis measurement from fluorescence to cumulative payload delivery. Then change one available receptor, trafficking, or timing setting at a time.
+4. **Inspect or extend the model.** Read the [illustrated article](https://datarichinsightpoor.github.io/organoid-hook-model/article.html) for interpretation and the [equations and parameter definitions](https://datarichinsightpoor.github.io/organoid-hook-model/equations.html) for the mathematics. To run new parameter combinations, use the [Colab notebook](https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb) or follow **Run locally** below.
+
+The browser displays precomputed scenarios; it does not fit your data or solve arbitrary new settings. The model is uncalibrated, so use it to examine assumptions and competing explanations, not to predict your assay's potency.
+
 [Run and modify the actual model in Colab](https://colab.research.google.com/github/dataRichinsightPoor/organoid-hook-model/blob/main/examples/quickstart.ipynb). The notebook downloads the version-pinned public release, runs the tests, and lets you change continuous parameters without a local Python installation; it executes in a third-party notebook runtime.
 
 [Follow one simulation](https://datarichinsightpoor.github.io/organoid-hook-model/#follow-one-simulation): step through six computed time points from receptor copies to fluorescence, compare three dose conditions, and inspect the substituted equations in the [complete worked example](https://datarichinsightpoor.github.io/organoid-hook-model/worked-example.html). This fixed Reference example is independent of the atlas controls and uses the unchanged v0.1.0 model. Its downloadable script, parameters, shell states, and aggregate trajectories are included.
