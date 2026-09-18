@@ -9,6 +9,7 @@
 .reader mjx-container:not([display="true"]){display:inline-block;vertical-align:middle}
 header nav{flex-wrap:wrap}
 .trace-section{margin-top:var(--s10);padding-top:var(--s8);border-top:1px solid var(--line);scroll-margin-top:var(--s6)}
+.schematic-gallery{margin-bottom:var(--s8)}.schematic-gallery img{display:block;width:100%;height:auto;margin-top:var(--s4)}.schematic-gallery details p{max-width:85ch}.schematic-gallery summary{min-height:44px;display:list-item}
 .trace-section h2{margin:var(--s3) 0}.trace-lede{max-width:72ch}
 .trace-controls{display:grid;grid-template-columns:minmax(260px,1fr) minmax(300px,1fr);gap:var(--s6);margin:var(--s6) 0}
 .trace-controls label{margin:0 0 var(--s2)}.trace-controls fieldset{border:0;padding:0;margin:0;min-width:0}
