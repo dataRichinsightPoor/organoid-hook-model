@@ -32,9 +32,14 @@ def test_article_tenfold_primary_with_secondary_excess():
     assert peak_primary_nm(1000.)>10.
 
 def test_finite_secondary_excess_is_not_a_universal_monotonicity_rule():
-    # Strong primary affinity can place a small decline inside nominal S excess.
-    ka=1e-6
+    # Test the exact finite-S criterion, not an extreme-affinity tiny decline.
+    ka=1e-3
     ks=.3
     peak=peak_primary_nm(1000.,ka,ks)
-    assert peak<10.
-    assert ternary_equilibrium(10.,1000.,.001,ka,ks)<ternary_equilibrium(peak,1000.,.001,ka,ks)
+    assert 54<peak<55
+    ratio=ternary_equilibrium(1000.,1000.,.001,ka,ks)/ternary_equilibrium(peak,1000.,.001,ka,ks)
+    assert ratio<.99
+    assert np.isclose(1000/peak,1+np.sqrt(ks/ka),rtol=.001)
+    threshold=ka+np.sqrt(ka*ks)
+    for s in (.5*threshold,2*threshold):
+        assert (peak_primary_nm(s,ka,ks)<s)==(s>threshold)

@@ -1,0 +1,142 @@
+{
+  "scope": "Synthetic checks, not assay validation; default dynamic model unchanged.",
+  "default_geometry": {
+    "initial_cells": 141371.6694115407,
+    "local_surface_receptor_equivalent_nm": [
+      415.1347667934616,
+      415.1347667934616,
+      415.1347667934616
+    ],
+    "initial_surface_receptor_equivalent_per_total_accessible_well_nm": 0.23462050527941114
+  },
+  "tenfold_example": {
+    "loaded_fractions": [
+      0.4998498949715432,
+      0.9088155112938339
+    ],
+    "fold_change": 1.8181768575655566,
+    "peak_primary_nm": 646.6583546929821
+  },
+  "finite_receptor_equilibria": [
+    {
+      "receptor_nm": 0.001,
+      "interpretation": "Uniform closed compartment, fixed surface receptor; not a dynamic organoid.",
+      "primary_1": {
+        "loaded_fraction": 0.4997249325056104,
+        "free_primary_nm": 0.0003000599894115591,
+        "free_secondary_nm": 999.0003002100572,
+        "max_relative_balance_error": 2.2737367544323206e-16
+      },
+      "primary_10": {
+        "loaded_fraction": 0.9088079998631432,
+        "free_primary_nm": 0.003029100372309521,
+        "free_secondary_nm": 990.0030293757677,
+        "max_relative_balance_error": 1.1368683772161603e-16
+      }
+    },
+    {
+      "receptor_nm": 0.23462050527941114,
+      "interpretation": "Uniform closed compartment, fixed surface receptor; not a dynamic organoid.",
+      "primary_1": {
+        "loaded_fraction": 0.4706313170464618,
+        "free_primary_nm": 0.00026705098057037936,
+        "free_secondary_nm": 999.0003002100572,
+        "max_relative_balance_error": 3.410605131648481e-16
+      },
+      "primary_10": {
+        "loaded_fraction": 0.9070220779289179,
+        "free_primary_nm": 0.0029648893050897526,
+        "free_secondary_nm": 990.0030293757677,
+        "max_relative_balance_error": 5.329070518200751e-16
+      }
+    },
+    {
+      "receptor_nm": 415.1347667934616,
+      "interpretation": "Uniform closed compartment, fixed surface receptor; not a dynamic organoid.",
+      "primary_1": {
+        "loaded_fraction": 0.0024023323280735775,
+        "free_primary_nm": 7.23158691952812e-07,
+        "free_secondary_nm": 999.0003002100572,
+        "max_relative_balance_error": 2.2737367544323206e-16
+      },
+      "primary_10": {
+        "loaded_fraction": 0.024021975522915778,
+        "free_primary_nm": 7.458588573346702e-06,
+        "free_secondary_nm": 990.0030293757677,
+        "max_relative_balance_error": 1.5987211554602255e-15
+      }
+    }
+  ],
+  "peak_checks": {
+    "random_parameter_sets": 100,
+    "max_relative_grid_peak_error": 6.661338147750939e-16
+  },
+  "dynamic_examples": [
+    {
+      "primary_nm": 1.0,
+      "secondary_nm": 1000.0,
+      "note": "New review-only simulations, outside the committed atlas grid.",
+      "time_h": [
+        24.0,
+        72.0
+      ],
+      "surface_complex_copies": [
+        10986.230203227804,
+        12641.374176945093
+      ],
+      "delivered_payload_cumulative": [
+        1206.935711609336,
+        7827.783666765721
+      ],
+      "payload_copies": [
+        816.3993432837881,
+        2408.909265809185
+      ],
+      "permeability_fluorescence": [
+        0.10072304506071467,
+        0.9214208087038727
+      ]
+    },
+    {
+      "primary_nm": 10.0,
+      "secondary_nm": 1000.0,
+      "note": "New review-only simulations, outside the committed atlas grid.",
+      "time_h": [
+        24.0,
+        72.0
+      ],
+      "surface_complex_copies": [
+        47731.55173437369,
+        35221.07086709009
+      ],
+      "delivered_payload_cumulative": [
+        7937.052932757193,
+        31521.491247984937
+      ],
+      "payload_copies": [
+        5104.075984506122,
+        7868.867315698348
+      ],
+      "permeability_fluorescence": [
+        0.3786573456273666,
+        0.9921318994814669
+      ]
+    }
+  ],
+  "payload_scale_nonidentifiability": {
+    "change": "Double release efficiency and P50 together; all other parameters fixed.",
+    "max_absolute_fluorescence_difference": 1.0634606206760822e-07,
+    "delivery_at_72h": [
+      9724.40936227484,
+      19448.818805711748
+    ],
+    "fluorescence_at_72h": [
+      0.985057976502196,
+      0.9850579591026803
+    ],
+    "relative_delivery_reduction": [
+      0.6314562075160701,
+      0.6314562090540432
+    ]
+  }
+}

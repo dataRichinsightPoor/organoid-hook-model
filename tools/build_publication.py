@@ -11,7 +11,7 @@ INLINE = {
     "A_0": "A₀", "S_0": "S₀", "R_0": "R₀", "K_A": "KA", "K_S": "KS",
     r"\Sigma=A_0+S_0+K_S": "Σ = A₀ + S₀ + KS",
     "W_c": "Wc", r"k_{\mathrm{deg}}": "kdeg", "d": "d", r"\eta": "η",
-    "P": "P", "t": "t", "k_P": "kP",
+    "P": "P", "P_{50}": "P₅₀", "t": "t", "k_P": "kP",
     r"\eta d\,k_{\mathrm{deg}}W_c": "η d kdeg Wc",
     "j": "j", "u": "u", "r_j(u)": "rⱼ(u)",
     r"k_{\mathrm{perm}}E_j(u)": "kperm Eⱼ(u)",

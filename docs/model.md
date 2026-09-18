@@ -48,6 +48,8 @@ A_{\mathrm{peak}}=
 
 Therefore, adding secondary shifts the assembly maximum to a larger total primary concentration in this limiting model. It does not abolish the high-primary asymptote. A hook can disappear from the tested window while remaining in the underlying assembly curve.
 
+The peak lies inside nominal secondary excess, \(A_{\mathrm{peak}}<S_0\), exactly when \(S_0>K_A+\sqrt{K_AK_S}\). At large \(S_0\), the ratio \(S_0/A_{\mathrm{peak}}\) approaches \(1+\sqrt{K_S/K_A}\), which exceeds one. This is an asymptotic result, not a statement that the peak lies below \(S_0\) at every finite secondary concentration.
+
 ### Derivation and limits
 
 Let free primary be \(a\), free secondary \(s\), and free receptor \(r\). At equilibrium, \(C=as/K_S\), \(B=ar/K_A\), and \(T=ars/(K_AK_S)\). With receptor depletion neglected, \(A_0=a+C\); the receptor balance gives \(R_0=r+B+T=r[1+(a+C)/K_A]\), hence \(T=R_0C/(K_A+A_0)\).
@@ -65,6 +67,8 @@ R_{\mathrm{tot}}=r+B+T.
 Solve these with the equilibrium relationships rather than using the receptor-dilute approximation. The dynamic finite-bath model below instead conserves each reagent across bath, tissue, internalized complexes, and degradation inventories.
 
 The reduced equation does not predict cell killing, specify a half-maximal lethal concentration, or encode diffusion, preincubation, turnover, multivalency, or signal persistence. These processes must not be disguised as fitted changes in \(K_A\) or \(K_S\).
+
+The default dynamic geometry is not generally in this dilute regime: its initial surface receptor equivalent is approximately 415 nM within local accessible extracellular volume, or 0.235 nM averaged over the bath plus accessible tissue volume. These different concentration bases must not be interchanged. The analytical expression is a limiting case under explicitly simplified conditions, not a numerical substitute for default finite-bath organoid trajectories. At secondary 1,000 nM and primary 1 versus 10 nM, the dilute loaded fractions are approximately 0.50 and 0.91, whereas the dynamic 72-hour surface ternary inventories are approximately 12,641 and 35,221 copies per initial cell. See `tools/review_checks.py` and `results/review-checks.json`.
 
 ## Complete dynamical model
 

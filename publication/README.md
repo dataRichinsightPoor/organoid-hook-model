@@ -6,7 +6,7 @@ This package prepares the same essay for publication on LinkedIn and Substack. I
 
 ## Manuscript and images
 
-Use `the-hook-is-a-property-of-the-system.md` as the editorial copy. It contains the complete essay, natural inline source links, and eleven peer-reviewed references. Inline notation uses ordinary characters; the five displayed equations have image positions in the text.
+Use `the-hook-is-a-property-of-the-system.md` as the editorial copy. It contains the complete essay, natural inline source links, and fifteen peer-reviewed references, with manufacturer documentation identified separately in the prose. Inline notation uses ordinary characters; the five displayed equations have image positions in the text.
 
 Insert the corresponding files from `equations/light/` at those positions. The white-background images are intended for a light article body; equivalent files in `equations/dark/` are supplied for a dark composition. Each image is captured at three-times browser pixel density from the public article's actual mathematical typesetting. Image descriptions are included in the manuscript.
 

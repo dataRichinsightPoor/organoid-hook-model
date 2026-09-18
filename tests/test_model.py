@@ -139,3 +139,15 @@ def test_saturation_cannot_create_hook():
     x=np.linspace(0,1,101)
     for sat in (0,1,100):
         assert np.all(np.diff((1+sat)*x/(1+sat*x))>=0)
+
+def test_payload_scale_nonidentifiability():
+    """Joint release/P50 scaling doubles payload but preserves observed death."""
+    p=Parameters()
+    base=summarize(simulate(8.254,3,p=p))
+    scaled=summarize(simulate(8.254,3,p=replace(
+        p,release_efficiency=2*p.release_efficiency,
+        payload_p50=2*p.payload_p50)))
+    assert np.allclose(base["permeability_fluorescence"],
+                       scaled["permeability_fluorescence"],atol=2e-6,rtol=0)
+    for key in ("payload_copies","delivered_payload_cumulative"):
+        assert np.allclose(2*base[key],scaled[key],atol=2e-3,rtol=2e-6)
