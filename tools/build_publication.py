@@ -46,6 +46,7 @@ text = text.replace("](equations/light/", f"]({PUBLIC}/equation-images/light/")
 (OUT / "the-hook-is-a-property-of-the-system.md").write_text(text)
 (OUT / "figures").mkdir(exist_ok=True)
 for filename in ("cover-hook-system.png", "cover-hook-system-linkedin.png",
+                 "cover-hook-system-substack.png",
                  "mechanism-map.png", "readout-separation.png",
                  "cell-scenarios.png", "cell-trafficking.png", "cell-addition-orders.png",
                  "cell-hook-assembly.png"):

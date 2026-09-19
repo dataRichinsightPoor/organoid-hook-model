@@ -15,6 +15,12 @@ MUTED = "#a4afbd"
 CYAN = "#70d4df"
 BORDER = "#394452"
 FONT = Path("/usr/share/fonts/truetype/dejavu")
+TITLE = "You Rescued the Curve. Did You Rescue Delivery?"
+SUBTITLE = (
+    "How a disappearing hook can conceal a persistent payload deficit, and what "
+    "an interactive organoid model reveals about the gap between delivery and "
+    "cell-death fluorescence."
+)
 
 
 def font(size, bold=False):
@@ -35,23 +41,12 @@ def compose():
 
     d.line((80,106,145,106),fill=CYAN,width=3)
     text(80,126,"Data-Rich, Insight-Poor — CCXXIV",25,CYAN)
-    for i,line in enumerate(["The Hook Is a","Property of","the System"]):
-        text(76,216+i*95,line,77,bold=True)
-    for i,line in enumerate([
-        "Receptor copies are not payload delivery.",
-        "Payload delivery is not fluorescence.",
-        "Follow the accounting in a public model.",
-    ]):
-        text(80,548+i*43,line,27,MUTED)
-    d.line((80,711,766,711),fill=BORDER,width=2)
-    for x,value,lines in [
-        (80,"5,304",["synthetic","simulations"]),
-        (327,"4",["addition","orders"]),
-        (554,"60",["coupled","model states"]),
-    ]:
-        text(x,737,value,44,CYAN,True)
-        for j,line in enumerate(lines):
-            text(x,795+j*30,line,24,MUTED)
+    for i,line in enumerate(["You Rescued","the Curve.","Did You Rescue","Delivery?"]):
+        text(76,200+i*77,line,68,bold=True)
+    lines = wrap(SUBTITLE, font(28), 700, d)
+    for i,line in enumerate(lines):
+        text(80,545+i*41,line,28,MUTED)
+    d.line((80,835,766,835),fill=BORDER,width=2)
     text(80,907,"SYNTHETIC · UNCALIBRATED",23,CYAN)
     text(80,946,"github.com/dataRichinsightPoor/",22,MUTED)
     text(80,974,"organoid-hook-model",22,MUTED)
@@ -69,5 +64,48 @@ def compose():
     print("Saved cover-hook-system.png (1920×1080) and LinkedIn edition (1200×675).")
 
 
+def wrap(value, face, width, draw):
+    lines = []
+    for word in value.split():
+        if not lines or draw.textlength(lines[-1] + " " + word, font=face) > width:
+            lines.append(word)
+        else:
+            lines[-1] += " " + word
+    assert " ".join(lines) == value
+    return lines
+
+
+def compose_substack():
+    """A dedicated 1456×1048 layout, not a crop of the widescreen cover."""
+    im = Image.new("RGB", (1456, 1048), BG)
+    d = ImageDraw.Draw(im)
+    def text(x, y, value, size, color=FG, bold=False):
+        d.text((x,y), value, font=font(size,bold), fill=color)
+    d.line((56,50,112,50), fill=CYAN, width=3)
+    text(56,69,"Data-Rich, Insight-Poor — CCXXIV",22,CYAN)
+    for i,line in enumerate(["You Rescued the Curve.", "Did You Rescue Delivery?"]):
+        text(52,125+i*78,line,66,bold=True)
+    for i,line in enumerate(wrap(SUBTITLE, font(26), 1320, d)):
+        text(56,303+i*37,line,26,MUTED)
+    d.line((56,446,1400,446), fill=BORDER, width=1)
+    text(56,475,"THE PUBLIC MODEL · 72 HOURS · ACCUMULATION",20,CYAN)
+    graph = Image.open(OUT/"cover-inputs/reference-curves.png").convert("RGB")
+    graph = graph.resize((900,round(900*graph.height/graph.width)),Image.Resampling.LANCZOS)
+    im.paste(graph,(48,521))
+    text(987,533,"A recovered endpoint",22)
+    text(987,568,"can conceal",22)
+    text(987,603,"reduced delivery.",22,CYAN,True)
+    text(987,690,"5,304 synthetic",22,MUTED)
+    text(987,725,"simulations.",22,MUTED)
+    text(987,794,"Explore the model.",22)
+    text(987,829,"Inspect the equations.",22)
+    text(56,944,"SYNTHETIC · UNCALIBRATED",19,CYAN)
+    text(56,985,"github.com/dataRichinsightPoor/organoid-hook-model",18,MUTED)
+    text(1190,984,"Ermelinda Damko",19)
+    im.save(OUT/"cover-hook-system-substack.png",optimize=True)
+    print("Saved cover-hook-system-substack.png (1456×1048).")
+
+
 if __name__ == "__main__":
     compose()
+    compose_substack()
